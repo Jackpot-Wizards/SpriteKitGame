@@ -9,102 +9,136 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene {
+struct CollisionCategories {
+    static let Character: UInt32 = 0x01;
+    static let Platform: UInt32 = 0x02;
+    static let Ground: UInt32 = 0x04;
+}
+
+class GameScene: SKScene, SKPhysicsContactDelegate {
     
-    var entities = [GKEntity]()
-    var graphs = [String : GKGraph]()
+    private var characterNode : Character!
+    private var groundNode : SKSpriteNode!
+    private var platformNode : SKSpriteNode!
+    private var characterXSpeed : CGFloat = 0.0
     
-    private var lastUpdateTime : TimeInterval = 0
-    private var label : SKLabelNode?
-    private var spinnyNode : SKShapeNode?
+    private let platformTestSpeed : CGFloat = 0.05
     
     override func sceneDidLoad() {
-
-        self.lastUpdateTime = 0
         
-        // Get label node from scene and store it for use later
-        self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
-        if let label = self.label {
-            label.alpha = 0.0
-            label.run(SKAction.fadeIn(withDuration: 2.0))
+        physicsWorld.contactDelegate = self
+        
+        characterNode = Character()
+        characterNode.position = CGPoint(x: 250, y: -100)
+        addChild(characterNode)
+        
+        groundNode = self.childNode(withName: "//groundNode") as? SKSpriteNode
+        groundNode.physicsBody = SKPhysicsBody(rectangleOf: groundNode.size)
+        groundNode.physicsBody?.isDynamic = false
+        groundNode.physicsBody?.categoryBitMask = CollisionCategories.Ground
+        groundNode.physicsBody?.collisionBitMask = 0
+        
+        platformNode = self.childNode(withName: "//platform") as? SKSpriteNode
+        platformNode.physicsBody = SKPhysicsBody(rectangleOf: platformNode.size)
+        platformNode.physicsBody?.isDynamic = false
+        platformNode.physicsBody?.restitution = 0.0
+        platformNode.physicsBody?.categoryBitMask = CollisionCategories.Platform
+        platformNode.physicsBody?.contactTestBitMask = CollisionCategories.Character
+        platformNode.physicsBody?.collisionBitMask = 0
+        
+        characterNode.physicsBody = SKPhysicsBody(rectangleOf: characterNode.size)
+        characterNode.physicsBody?.isDynamic = true
+        characterNode.physicsBody?.angularDamping = 0.0
+        characterNode.physicsBody?.allowsRotation = false
+        characterNode.physicsBody?.restitution = 0.0
+        characterNode.physicsBody?.usesPreciseCollisionDetection = true
+        characterNode.physicsBody?.categoryBitMask = CollisionCategories.Character
+        characterNode.physicsBody?.contactTestBitMask = CollisionCategories.Platform
+        characterNode.physicsBody?.collisionBitMask = CollisionCategories.Ground
+    }
+    
+    func HadleCharacterCollision(character: SKNode, object: SKNode)
+    {
+        if (object.name == "platform")
+        {
+            // comparison with 0 here doesn't work -
+            // while being on a platform and making short tap, after the character lands,
+            // velocity is equal to very small value for some reason (maybe because of bounce
+            // despite restitution is set to zero?)
+            if ((character.physicsBody?.velocity.dy)! >= 0.1)
+            {
+                print((character.physicsBody?.velocity.dy)!)
+                characterNode.physicsBody?.collisionBitMask = CollisionCategories.Ground
+            }
+            else
+            {
+                characterNode.physicsBody?.collisionBitMask = CollisionCategories.Ground | CollisionCategories.Platform
+                characterXSpeed = platformTestSpeed
+            }
         }
-        
-        // Create shape node to use during mouse interaction
-        let w = (self.size.width + self.size.height) * 0.05
-        self.spinnyNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.3)
-        
-        if let spinnyNode = self.spinnyNode {
-            spinnyNode.lineWidth = 2.5
-            
-            spinnyNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 1)))
-            spinnyNode.run(SKAction.sequence([SKAction.wait(forDuration: 0.5),
-                                              SKAction.fadeOut(withDuration: 0.5),
-                                              SKAction.removeFromParent()]))
+    }
+    
+    func HadleCharacterCollisionEnd(character: SKNode, object: SKNode)
+    {
+        if (object.name == "platform")
+        {
+            // need to set character speed to 0
+            characterXSpeed = 0
+        }
+    }
+    
+    func didBegin(_ contact: SKPhysicsContact)
+    {
+        if contact.bodyA.node?.name == "character"
+        {
+            HadleCharacterCollision(character: contact.bodyA.node!, object: contact.bodyB.node!)
+        }
+        else if contact.bodyB.node?.name == "character"
+        {
+            HadleCharacterCollision(character: contact.bodyB.node!, object: contact.bodyA.node!)
+        }
+    }
+    
+    func didEnd(_ contact: SKPhysicsContact)
+    {
+        if contact.bodyA.node?.name == "character"
+        {
+            HadleCharacterCollisionEnd(character: contact.bodyA.node!, object: contact.bodyB.node!)
+        }
+        else if contact.bodyB.node?.name == "character"
+        {
+            HadleCharacterCollisionEnd(character: contact.bodyB.node!, object: contact.bodyA.node!)
         }
     }
     
     
     func touchDown(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.green
-            self.addChild(n)
-        }
     }
     
     func touchMoved(toPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.blue
-            self.addChild(n)
-        }
     }
     
     func touchUp(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.red
-            self.addChild(n)
-        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let label = self.label {
-            label.run(SKAction.init(named: "Pulse")!, withKey: "fadeInOut")
-        }
-        
-        for t in touches { self.touchDown(atPoint: t.location(in: self)) }
+        characterNode.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 200))
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchMoved(toPoint: t.location(in: self)) }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
+        
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
     }
     
     
     override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
-        
-        // Initialize _lastUpdateTime if it has not already been
-        if (self.lastUpdateTime == 0) {
-            self.lastUpdateTime = currentTime
-        }
-        
-        // Calculate time since last update
-        let dt = currentTime - self.lastUpdateTime
-        
-        // Update entities
-        for entity in self.entities {
-            entity.update(deltaTime: dt)
-        }
-        
-        self.lastUpdateTime = currentTime
+        // just for test
+        platformNode.position.x -= self.platformTestSpeed
+        characterNode.position.x -= characterXSpeed
     }
 }

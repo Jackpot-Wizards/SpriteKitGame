@@ -15,6 +15,13 @@
 		F40AD34E23DCAE58009253FC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F40AD34C23DCAE58009253FC /* Main.storyboard */; };
 		F40AD35023DCAE59009253FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F40AD34F23DCAE59009253FC /* Assets.xcassets */; };
 		F40AD35323DCAE59009253FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F40AD35123DCAE59009253FC /* LaunchScreen.storyboard */; };
+		F40AD35B23DCAEF7009253FC /* GameProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40AD35A23DCAEF7009253FC /* GameProtocol.swift */; };
+		F40AD35E23DCAF84009253FC /* Ground.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40AD35D23DCAF84009253FC /* Ground.swift */; };
+		F40AD36023DCAF93009253FC /* Sky.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40AD35F23DCAF93009253FC /* Sky.swift */; };
+		F40AD36223DCAFF1009253FC /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40AD36123DCAFF1009253FC /* Platform.swift */; };
+		F40AD36423DCAFFD009253FC /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40AD36323DCAFFD009253FC /* Character.swift */; };
+		F40AD36623DCB21F009253FC /* GameObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40AD36523DCB21F009253FC /* GameObject.swift */; };
+		F40AD36823DCC687009253FC /* StarPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40AD36723DCC687009253FC /* StarPoint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +35,13 @@
 		F40AD34F23DCAE59009253FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F40AD35223DCAE59009253FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F40AD35423DCAE59009253FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F40AD35A23DCAEF7009253FC /* GameProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameProtocol.swift; sourceTree = "<group>"; };
+		F40AD35D23DCAF84009253FC /* Ground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ground.swift; sourceTree = "<group>"; };
+		F40AD35F23DCAF93009253FC /* Sky.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sky.swift; sourceTree = "<group>"; };
+		F40AD36123DCAFF1009253FC /* Platform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
+		F40AD36323DCAFFD009253FC /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
+		F40AD36523DCB21F009253FC /* GameObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameObject.swift; sourceTree = "<group>"; };
+		F40AD36723DCC687009253FC /* StarPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarPoint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +74,7 @@
 		F40AD34123DCAE58009253FC /* SpriteKitGame */ = {
 			isa = PBXGroup;
 			children = (
+				F40AD35C23DCAF58009253FC /* Objects */,
 				F40AD34223DCAE58009253FC /* AppDelegate.swift */,
 				F40AD34423DCAE58009253FC /* GameScene.sks */,
 				F40AD34623DCAE58009253FC /* Actions.sks */,
@@ -71,6 +86,20 @@
 				F40AD35423DCAE59009253FC /* Info.plist */,
 			);
 			path = SpriteKitGame;
+			sourceTree = "<group>";
+		};
+		F40AD35C23DCAF58009253FC /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				F40AD35A23DCAEF7009253FC /* GameProtocol.swift */,
+				F40AD35D23DCAF84009253FC /* Ground.swift */,
+				F40AD35F23DCAF93009253FC /* Sky.swift */,
+				F40AD36123DCAFF1009253FC /* Platform.swift */,
+				F40AD36323DCAFFD009253FC /* Character.swift */,
+				F40AD36523DCB21F009253FC /* GameObject.swift */,
+				F40AD36723DCC687009253FC /* StarPoint.swift */,
+			);
+			name = Objects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,9 +175,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F40AD36223DCAFF1009253FC /* Platform.swift in Sources */,
 				F40AD34923DCAE58009253FC /* GameScene.swift in Sources */,
+				F40AD36623DCB21F009253FC /* GameObject.swift in Sources */,
+				F40AD36823DCC687009253FC /* StarPoint.swift in Sources */,
+				F40AD35B23DCAEF7009253FC /* GameProtocol.swift in Sources */,
+				F40AD36423DCAFFD009253FC /* Character.swift in Sources */,
 				F40AD34B23DCAE58009253FC /* GameViewController.swift in Sources */,
 				F40AD34323DCAE58009253FC /* AppDelegate.swift in Sources */,
+				F40AD35E23DCAF84009253FC /* Ground.swift in Sources */,
+				F40AD36023DCAF93009253FC /* Sky.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,7 +340,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.SpriteKitGame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -322,7 +358,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.SpriteKitGame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
