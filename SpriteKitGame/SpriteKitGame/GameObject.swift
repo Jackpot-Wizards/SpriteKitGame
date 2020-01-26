@@ -37,8 +37,8 @@ class GameObject: SKSpriteNode, GameProtocol
         let color = UIColor.clear
         super.init(texture: texture, color: color, size: size)
         
-        self.width = texture.size().width
-        self.height = texture.size().height
+        self.width = size.width
+        self.height = size.height
         self.halfWidth = self.width! * 0.5
         self.halfHeight = self.height! * 0.5
         self.isColliding = false

@@ -58,13 +58,14 @@ class Character: GameObject
         {
             eligibleToJump = true
         }
-        
+
         // TODO: use state machine here
-        if ((self.physicsBody?.velocity.dy)! >= 0)
+        if (self.physicsBody?.velocity.dy)! >= 0
         {
             self.physicsBody?.collisionBitMask = CollisionCategories.Ground
         }
-        else
+        // TODO: somehow use platforms position here
+        else if (self.position.y - self.halfHeight!) >= 0
         {
             self.physicsBody?.collisionBitMask = CollisionCategories.Ground | CollisionCategories.Platform
         }
@@ -78,7 +79,9 @@ class Character: GameObject
     
     func Jump()
     {
-        if ((self.physicsBody?.velocity.dy)! < 0.1 && (self.physicsBody?.velocity.dy)! >= -0.1 && eligibleToJump == true)
+        print("jump")
+        print((self.physicsBody?.velocity.dy)!)
+        if ((self.physicsBody?.velocity.dy)! < 0.1 && (self.physicsBody?.velocity.dy)! > -0.1 && eligibleToJump == true)
         {
             FirstJump()
         }
@@ -92,15 +95,11 @@ class Character: GameObject
     func FirstJump()
     {
         self.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 300))
-        print("speed first jump")
-        print((self.physicsBody?.velocity.dy)!)
     }
     
     func SecondJump()
     {
         self.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 200))
-        print("speed second jump")
-        print((self.physicsBody?.velocity.dy)!)
     }
 }
 

@@ -106,8 +106,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         else if contact.bodyB.node?.name == "character"
         {
-            print("platform second attempt")
-            print((contact.bodyB.node!.physicsBody?.velocity.dy)!)
             HadleCharacterCollision(character: contact.bodyB.node!, object: contact.bodyA.node!)
         }
         else if contact.bodyA.node?.name == "bullet"
