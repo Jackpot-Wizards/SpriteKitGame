@@ -15,13 +15,12 @@ class Character: GameObject
     
     var eligibleToJump = true
     var isInFirstJump: Bool = true
-    
+    var characterSpeed = 0.0
     
     // constructor
     override init()
     {
         super.init(imageString: "character", size: CGSize(width: 100.0, height: 100.0))
-        name = "character"
         Start()
     }
     
@@ -41,6 +40,16 @@ class Character: GameObject
     override func Start()
     {
         self.zPosition = 2
+        
+        self.physicsBody = SKPhysicsBody(rectangleOf: self.size)
+        self.physicsBody?.isDynamic = true
+        self.physicsBody?.angularDamping = 0.0
+        self.physicsBody?.allowsRotation = false
+        self.physicsBody?.restitution = 0.0
+        self.physicsBody?.usesPreciseCollisionDetection = true
+        self.physicsBody?.categoryBitMask = CollisionCategories.Character
+        self.physicsBody?.contactTestBitMask = CollisionCategories.Platform
+        self.physicsBody?.collisionBitMask = CollisionCategories.Ground
     }
     
     override func Update()
@@ -48,6 +57,16 @@ class Character: GameObject
         if ((self.physicsBody?.velocity.dy)! < 0.1 && (self.physicsBody?.velocity.dy)! >= -0.1 )
         {
             eligibleToJump = true
+        }
+        
+        // TODO: use state machine here
+        if ((self.physicsBody?.velocity.dy)! >= 0)
+        {
+            self.physicsBody?.collisionBitMask = CollisionCategories.Ground
+        }
+        else
+        {
+            self.physicsBody?.collisionBitMask = CollisionCategories.Ground | CollisionCategories.Platform
         }
     }
     
@@ -65,8 +84,6 @@ class Character: GameObject
         }
         else if (eligibleToJump)
         {
-            print("speed second jump")
-            print((self.physicsBody?.velocity.dy)!)
             eligibleToJump = false
             SecondJump()
         }
@@ -75,11 +92,15 @@ class Character: GameObject
     func FirstJump()
     {
         self.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 300))
+        print("speed first jump")
+        print((self.physicsBody?.velocity.dy)!)
     }
     
     func SecondJump()
     {
         self.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 200))
+        print("speed second jump")
+        print((self.physicsBody?.velocity.dy)!)
     }
 }
 

@@ -16,7 +16,6 @@ class Bullet: GameObject
     override init()
     {
         super.init(imageString: "bullet", size: CGSize(width: 100.0, height: 100.0))
-        name = "bullet"
         Start()
     }
     
@@ -36,6 +35,14 @@ class Bullet: GameObject
     override func Start()
     {
         self.zPosition = 2
+        
+        
+        self.physicsBody = SKPhysicsBody(rectangleOf: self.size)
+        self.physicsBody?.isDynamic = true
+        self.physicsBody?.affectedByGravity = false
+        self.physicsBody?.categoryBitMask = CollisionCategories.Bullet
+        self.physicsBody?.contactTestBitMask = CollisionCategories.Enemy
+        self.physicsBody?.collisionBitMask = 0
     }
     
     override func Update()

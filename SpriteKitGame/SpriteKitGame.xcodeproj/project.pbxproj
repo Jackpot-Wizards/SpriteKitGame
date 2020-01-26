@@ -24,6 +24,7 @@
 		F40AD36823DCC687009253FC /* StarPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40AD36723DCC687009253FC /* StarPoint.swift */; };
 		F4ED631123DD20610059CC84 /* Bullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ED631023DD20610059CC84 /* Bullet.swift */; };
 		F4ED631723DD45B80059CC84 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ED631623DD45B80059CC84 /* Enemy.swift */; };
+		F4F7300023DE471500EFA645 /* CollisionCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F72FFF23DE471500EFA645 /* CollisionCategories.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		F40AD36723DCC687009253FC /* StarPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarPoint.swift; sourceTree = "<group>"; };
 		F4ED631023DD20610059CC84 /* Bullet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bullet.swift; sourceTree = "<group>"; };
 		F4ED631623DD45B80059CC84 /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
+		F4F72FFF23DE471500EFA645 /* CollisionCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionCategories.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 				F40AD34F23DCAE59009253FC /* Assets.xcassets */,
 				F40AD35123DCAE59009253FC /* LaunchScreen.storyboard */,
 				F40AD35423DCAE59009253FC /* Info.plist */,
+				F4F72FFF23DE471500EFA645 /* CollisionCategories.swift */,
 			);
 			path = SpriteKitGame;
 			sourceTree = "<group>";
@@ -189,6 +192,7 @@
 				F40AD36423DCAFFD009253FC /* Character.swift in Sources */,
 				F40AD34B23DCAE58009253FC /* GameViewController.swift in Sources */,
 				F40AD34323DCAE58009253FC /* AppDelegate.swift in Sources */,
+				F4F7300023DE471500EFA645 /* CollisionCategories.swift in Sources */,
 				F4ED631723DD45B80059CC84 /* Enemy.swift in Sources */,
 				F40AD35E23DCAF84009253FC /* Ground.swift in Sources */,
 				F40AD36023DCAF93009253FC /* Sky.swift in Sources */,

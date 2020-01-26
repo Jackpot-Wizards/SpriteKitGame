@@ -9,24 +9,17 @@
 import SpriteKit
 import GameplayKit
 
-struct CollisionCategories {
-    static let Character: UInt32 = 1;
-    static let Platform: UInt32 = 2;
-    static let Ground: UInt32 = 4;
-    static let Bullet: UInt32 = 8;
-    static let Enemy: UInt32 = 16;
-}
-
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private var characterNode : Character!
     private var groundNode : SKSpriteNode!
-    private var platformNode : SKSpriteNode!
+    private var platformNode : Platform!
+    
     private var bullets : Array<Bullet> = Array()
     private var enemies : Array<Enemy> = Array()
     
     private var characterXSpeed : CGFloat = 0.0
-    private let platformTestSpeed : CGFloat = 0.5
+    private let platformTestSpeed : CGFloat = 1
     
     override func sceneDidLoad() {
         
@@ -40,7 +33,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         CreateCharacter()
         CreateEnemy(xPosition: 400, yPosition: -140)
     }
-    
+
     func HadleCharacterCollision(character: SKNode, object: SKNode)
     {
         if (object.name == "platform")
@@ -51,13 +44,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             // despite restitution is set to zero?)
             if ((character.physicsBody?.velocity.dy)! >= 0.1)
             {
+                print("character velocity >= 0.1")
                 print((character.physicsBody?.velocity.dy)!)
-                characterNode.physicsBody?.collisionBitMask = CollisionCategories.Ground
             }
             else
             {
-                characterNode.physicsBody?.collisionBitMask = CollisionCategories.Ground | CollisionCategories.Platform
-                characterXSpeed = platformTestSpeed
+                // if we were falling when contact happened
+                print("character velocity < 0.1")
+                print((character.physicsBody?.velocity.dy)!)
+//                characterXSpeed = platformTestSpeed
             }
         }
     }
@@ -66,8 +61,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     {
         if (object.name == "platform")
         {
+            print("character/platform collision ends")
             // need to set character speed to 0
-            characterXSpeed = 0
+//            characterXSpeed = 0
         }
     }
     
@@ -110,6 +106,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         else if contact.bodyB.node?.name == "character"
         {
+            print("platform second attempt")
+            print((contact.bodyB.node!.physicsBody?.velocity.dy)!)
             HadleCharacterCollision(character: contact.bodyB.node!, object: contact.bodyA.node!)
         }
         else if contact.bodyA.node?.name == "bullet"
@@ -163,18 +161,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func update(_ currentTime: TimeInterval) {
         // just for test
-        platformNode.position.x -= self.platformTestSpeed
-        characterNode.position.x -= characterXSpeed
-        
         characterNode.Update()
-        
+        platformNode.Update()
         
         for (i,bullet) in bullets.enumerated().reversed()
         {
             bullet.Update()
+            
             if bullet.position.x > 475
             {
-                print("bullet destroyed")
                 bullets.remove(at: i)
                 bullet.removeFromParent()
             }
@@ -183,8 +178,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if (enemies.count == 0)
         {
             // this is just for testing
-            // made random
-            print("enemy created")
             CreateEnemy(xPosition: 400, yPosition: -140)
         }
         
@@ -195,7 +188,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if enemy.position.x < -475
             {
                 enemy.isDestroyed = true
-                print("enemy destroyed")
                 enemies.remove(at: i)
                 enemy.removeFromParent()
             }
@@ -225,16 +217,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         characterNode = Character()
         characterNode.position = CGPoint(x: 0, y: -100)
         addChild(characterNode)
-        
-        characterNode.physicsBody = SKPhysicsBody(rectangleOf: characterNode.size)
-        characterNode.physicsBody?.isDynamic = true
-        characterNode.physicsBody?.angularDamping = 0.0
-        characterNode.physicsBody?.allowsRotation = false
-        characterNode.physicsBody?.restitution = 0.0
-        characterNode.physicsBody?.usesPreciseCollisionDetection = true
-        characterNode.physicsBody?.categoryBitMask = CollisionCategories.Character
-        characterNode.physicsBody?.contactTestBitMask = CollisionCategories.Platform
-        characterNode.physicsBody?.collisionBitMask = CollisionCategories.Ground
     }
     
     func CreateGround()
@@ -248,26 +230,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func CreatePlatform()
     {
-        platformNode = self.childNode(withName: "//platform") as? SKSpriteNode
-        platformNode.physicsBody = SKPhysicsBody(rectangleOf: platformNode.size)
-        platformNode.physicsBody?.isDynamic = false
-        platformNode.physicsBody?.restitution = 0.0
-        platformNode.physicsBody?.categoryBitMask = CollisionCategories.Platform
-        platformNode.physicsBody?.contactTestBitMask = CollisionCategories.Character
-        platformNode.physicsBody?.collisionBitMask = 0
+        platformNode = Platform()
+        addChild(platformNode)
     }
     
     func CreateEnemy(xPosition: CGFloat, yPosition: CGFloat)
     {
         var enemyNode : Enemy = Enemy()
-        
-        enemyNode.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 10, height: enemyNode.size.height))
-        enemyNode.physicsBody?.isDynamic = true
-        enemyNode.physicsBody?.affectedByGravity = false
-        enemyNode.physicsBody?.categoryBitMask = CollisionCategories.Enemy
-        enemyNode.physicsBody?.contactTestBitMask = CollisionCategories.Bullet
-        enemyNode.physicsBody?.collisionBitMask = 0
-        
         enemyNode.position.x = xPosition
         enemyNode.position.y = yPosition
         enemies.append(enemyNode)
@@ -277,13 +246,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func CreateBullet()
     {
         var bulletNode : Bullet = Bullet()
-        
-        bulletNode.physicsBody = SKPhysicsBody(rectangleOf: bulletNode.size)
-        bulletNode.physicsBody?.isDynamic = true
-        bulletNode.physicsBody?.affectedByGravity = false
-        bulletNode.physicsBody?.categoryBitMask = CollisionCategories.Bullet
-        bulletNode.physicsBody?.contactTestBitMask = CollisionCategories.Enemy
-        bulletNode.physicsBody?.collisionBitMask = 0
         
         bulletNode.position.x = characterNode.position.x + 25
         bulletNode.position.y = characterNode.position.y - 12
