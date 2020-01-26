@@ -84,6 +84,4 @@ class GameObject: SKSpriteNode, GameProtocol
     public func Update() {
         
     }
-    
-    
 }

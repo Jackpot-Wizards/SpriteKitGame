@@ -12,7 +12,10 @@ import SpriteKit
 class Character: GameObject
 {
     var jumpAction: SKAction!
-    var isInJumping: Bool = false
+    
+    var eligibleToJump = true
+    var isInFirstJump: Bool = true
+    
     
     // constructor
     override init()
@@ -42,13 +45,41 @@ class Character: GameObject
     
     override func Update()
     {
-        self.CheckBounds()
+        if ((self.physicsBody?.velocity.dy)! < 0.1 && (self.physicsBody?.velocity.dy)! >= -0.1 )
+        {
+            eligibleToJump = true
+        }
     }
     
     
     func TouchMove(newPos: CGPoint)
     {
         self.position = newPos
+    }
+    
+    func Jump()
+    {
+        if ((self.physicsBody?.velocity.dy)! < 0.1 && (self.physicsBody?.velocity.dy)! >= -0.1 && eligibleToJump == true)
+        {
+            FirstJump()
+        }
+        else if (eligibleToJump)
+        {
+            print("speed second jump")
+            print((self.physicsBody?.velocity.dy)!)
+            eligibleToJump = false
+            SecondJump()
+        }
+    }
+    
+    func FirstJump()
+    {
+        self.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 300))
+    }
+    
+    func SecondJump()
+    {
+        self.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 200))
     }
 }
 
