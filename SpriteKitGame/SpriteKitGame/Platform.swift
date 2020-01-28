@@ -12,16 +12,19 @@ import SpriteKit
 class Platform: GameObject
 {
     var isDestroyed: Bool = false
-    var initialDx: CGFloat?
-    var initialDy: CGFloat?
     
-    init(_ initialX: CGFloat?, _ initialY: CGFloat?)
+    var initialX: CGFloat?
+    var initialY: CGFloat?
+    var leftSpeed: CGFloat?
+    
+    init(_ initialX: CGFloat, _ initialY: CGFloat, _ leftSpeed: CGFloat)
     {
         super.init(imageString: "nextButton", size: CGSize(width: 250.0, height: 15.0))
         self.name = "platform"
         
-        initialDx = initialX
-        initialDy = initialY
+        self.initialX = initialX
+        self.initialY = initialY
+        self.leftSpeed = leftSpeed
         
         Start()
     }
@@ -43,15 +46,15 @@ class Platform: GameObject
     
     override func Reset()
     {
-        position.x = initialDx!
+        position.x = initialX!
     }
     
     override func Start()
     {
         self.zPosition = 2
         
-        self.position.x = initialDx!
-        self.position.y = initialDy!
+        self.position.x = initialX!
+        self.position.y = initialY!
         
         self.physicsBody = SKPhysicsBody(rectangleOf: self.size)
         self.physicsBody?.isDynamic = false
@@ -69,7 +72,7 @@ class Platform: GameObject
         }
         else
         {
-            position.x -= 1
+            position.x -= leftSpeed!
         }
     }
 }

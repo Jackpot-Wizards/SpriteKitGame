@@ -6,6 +6,7 @@
 //  Copyright © 2020 Jackpot-Wizards. All rights reserved.
 //
 
+import Foundation
 import SpriteKit
 import GameplayKit
 
@@ -18,9 +19,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private var bullets : Array<Bullet> = Array()
     private var enemies : Array<Enemy> = Array()
-    
-    private var characterXSpeed : CGFloat = 0.0
-    private let platformTestSpeed : CGFloat = 1
     
     override func sceneDidLoad() {
         
@@ -46,17 +44,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             // despite restitution is set to zero?)
             if ((character.physicsBody?.velocity.dy)! >= 0.1)
             {
-                print("character velocity >= 0.1")
-                print((character.physicsBody?.velocity.dy)!)
                 character.physicsBody?.collisionBitMask = CollisionCategories.Ground
             }
             else
             {
                 // if we were falling when contact happened
-                print("character velocity < 0.1")
-                print((character.physicsBody?.velocity.dy)!)
                 character.physicsBody?.collisionBitMask = CollisionCategories.Ground | CollisionCategories.Platform
-//                characterXSpeed = platformTestSpeed
             }
         }
     }
@@ -191,7 +184,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             if enemy.position.x < -475
             {
-                enemy.isDestroyed = true
                 enemies.remove(at: i)
                 enemy.removeFromParent()
             }
@@ -234,13 +226,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func CreatePlatform1()
     {
-        platformNode1 = Platform(300, 0)
+        platformNode1 = Platform(300, 0, 2)
         addChild(platformNode1)
     }
     
     func CreatePlatform2()
     {
-        platformNode2 = Platform(400, -50)
+        platformNode2 = Platform(400, -50.0, 2)
         addChild(platformNode2)
     }
     
