@@ -13,7 +13,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private var characterNode : Character!
     private var groundNode : SKSpriteNode!
-    private var platformNode : Platform!
+    private var platformNode1 : Platform!
+    private var platformNode2 : Platform!
     
     private var bullets : Array<Bullet> = Array()
     private var enemies : Array<Enemy> = Array()
@@ -29,7 +30,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemies = [Enemy]()
         
         CreateGround()
-        CreatePlatform()
+        CreatePlatform1()
+        CreatePlatform2()
         CreateCharacter()
         CreateEnemy(xPosition: 400, yPosition: -140)
     }
@@ -161,9 +163,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     override func update(_ currentTime: TimeInterval) {
-        // just for test
+
         characterNode.Update()
-        platformNode.Update()
+        platformNode1.Update()
+        platformNode2.Update()
         
         for (i,bullet) in bullets.enumerated().reversed()
         {
@@ -229,10 +232,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         groundNode.physicsBody?.collisionBitMask = 0
     }
     
-    func CreatePlatform()
+    func CreatePlatform1()
     {
-        platformNode = Platform()
-        addChild(platformNode)
+        platformNode1 = Platform(300, 0)
+        addChild(platformNode1)
+    }
+    
+    func CreatePlatform2()
+    {
+        platformNode2 = Platform(400, -50)
+        addChild(platformNode2)
     }
     
     func CreateEnemy(xPosition: CGFloat, yPosition: CGFloat)
