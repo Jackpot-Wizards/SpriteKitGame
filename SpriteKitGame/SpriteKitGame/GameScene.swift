@@ -46,12 +46,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             {
                 print("character velocity >= 0.1")
                 print((character.physicsBody?.velocity.dy)!)
+                character.physicsBody?.collisionBitMask = CollisionCategories.Ground
             }
             else
             {
                 // if we were falling when contact happened
                 print("character velocity < 0.1")
                 print((character.physicsBody?.velocity.dy)!)
+                character.physicsBody?.collisionBitMask = CollisionCategories.Ground | CollisionCategories.Platform
 //                characterXSpeed = platformTestSpeed
             }
         }
@@ -62,6 +64,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if (object.name == "platform")
         {
             print("character/platform collision ends")
+            character.physicsBody?.collisionBitMask = CollisionCategories.Ground
             // need to set character speed to 0
 //            characterXSpeed = 0
         }

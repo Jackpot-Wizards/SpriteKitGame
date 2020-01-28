@@ -60,15 +60,15 @@ class Character: GameObject
         }
 
         // TODO: use state machine here
-        if (self.physicsBody?.velocity.dy)! >= 0
-        {
-            self.physicsBody?.collisionBitMask = CollisionCategories.Ground
-        }
-        // TODO: somehow use platforms position here
-        else if (self.position.y - self.halfHeight!) >= 0
-        {
-            self.physicsBody?.collisionBitMask = CollisionCategories.Ground | CollisionCategories.Platform
-        }
+//        if (self.physicsBody?.velocity.dy)! >= 0
+//        {
+//            self.physicsBody?.collisionBitMask = CollisionCategories.Ground
+//        }
+//        // TODO: somehow use platforms position here
+//        else if (self.position.y - self.halfHeight!) >= 0
+//        {
+//            self.physicsBody?.collisionBitMask = CollisionCategories.Ground | CollisionCategories.Platform
+//        }
     }
     
     
