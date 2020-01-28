@@ -16,8 +16,9 @@ class Platform: GameObject
     var initialX: CGFloat?
     var initialY: CGFloat?
     var leftSpeed: CGFloat?
+    var resetPoint: CGFloat?
     
-    init(_ initialX: CGFloat, _ initialY: CGFloat, _ leftSpeed: CGFloat)
+    init(_ initialX: CGFloat, _ initialY: CGFloat, _ leftSpeed: CGFloat, _ resetPoint: CGFloat)
     {
         super.init(imageString: "nextButton", size: CGSize(width: 250.0, height: 15.0))
         self.name = "platform"
@@ -25,6 +26,7 @@ class Platform: GameObject
         self.initialX = initialX
         self.initialY = initialY
         self.leftSpeed = leftSpeed
+        self.resetPoint = resetPoint
         
         Start()
     }
@@ -66,13 +68,13 @@ class Platform: GameObject
     
     override func Update()
     {
-        if (position.x < -550)
+        if (self.position.x < self.resetPoint!)
         {
             Reset()
         }
         else
         {
-            position.x -= leftSpeed!
+            self.position.x -= leftSpeed!
         }
     }
 }
