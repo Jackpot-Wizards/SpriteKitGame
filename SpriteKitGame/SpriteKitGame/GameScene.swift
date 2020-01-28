@@ -227,13 +227,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func CreatePlatform1()
     {
-        platformNode1 = Platform(500, 0, 2, -700)
+        platformNode1 = Platform(600, 100, 2, -600)
         addChild(platformNode1)
     }
     
     func CreatePlatform2()
     {
-        platformNode2 = Platform(600, -50.0, 2, -600)
+        platformNode2 = Platform(500, -50, 2, -700)
         addChild(platformNode2)
     }
     
