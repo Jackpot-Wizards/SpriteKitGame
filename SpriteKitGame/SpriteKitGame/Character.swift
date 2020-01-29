@@ -11,6 +11,8 @@ import SpriteKit
 
 class Character: GameObject
 {
+    private var runFrames: [SKTexture] = []
+    
     var jumpAction: SKAction!
     
     var eligibleToJump = true
@@ -21,7 +23,9 @@ class Character: GameObject
     override init()
     {
         super.init(imageString: "character", size: CGSize(width: 100.0, height: 100.0))
+        buildRunAnim()
         Start()
+        animate()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -50,6 +54,25 @@ class Character: GameObject
         self.physicsBody?.categoryBitMask = CollisionCategories.Character
         self.physicsBody?.contactTestBitMask = CollisionCategories.Platform
         self.physicsBody?.collisionBitMask = CollisionCategories.Ground
+    }
+    
+    func buildRunAnim() {
+        let runAnimatedAtlas = SKTextureAtlas(named: "player-run")
+        
+        let numImages = runAnimatedAtlas.textureNames.count
+        for i in 1...numImages {
+            let runTextureName = "player-run-\(i)"
+            runFrames.append(runAnimatedAtlas.textureNamed(runTextureName))
+        }
+    }
+    
+    func animate() {
+      self.run(SKAction.repeatForever(
+        SKAction.animate(with: runFrames,
+                         timePerFrame: 0.1,
+                         resize: false,
+                         restore: true)),
+        withKey:"running")
     }
     
     override func Update()

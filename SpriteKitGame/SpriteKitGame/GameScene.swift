@@ -35,7 +35,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         CreateEnemy(xPosition: 400, yPosition: -140)
     }
 
-    func HadleCharacterCollision(character: SKNode, object: SKNode)
+    func HandleCharacterCollision(character: SKNode, object: SKNode)
     {
         if (object.name == "platform")
         {
@@ -55,7 +55,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    func HadleCharacterCollisionEnd(character: SKNode, object: SKNode)
+    func HandleCharacterCollisionEnd(character: SKNode, object: SKNode)
     {
         if (object.name == "platform")
         {
@@ -66,7 +66,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    func HadleBulletCollision(bullet: SKNode, object: SKNode)
+    func HandleBulletCollision(bullet: SKNode, object: SKNode)
     {
         if (object.name == "enemy")
         {
@@ -101,19 +101,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     {
         if contact.bodyA.node?.name == "character"
         {
-            HadleCharacterCollision(character: contact.bodyA.node!, object: contact.bodyB.node!)
+            HandleCharacterCollision(character: contact.bodyA.node!, object: contact.bodyB.node!)
         }
         else if contact.bodyB.node?.name == "character"
         {
-            HadleCharacterCollision(character: contact.bodyB.node!, object: contact.bodyA.node!)
+            HandleCharacterCollision(character: contact.bodyB.node!, object: contact.bodyA.node!)
         }
         else if contact.bodyA.node?.name == "bullet"
         {
-            HadleBulletCollision(bullet: contact.bodyA.node!, object: contact.bodyB.node!)
+            HandleBulletCollision(bullet: contact.bodyA.node!, object: contact.bodyB.node!)
         }
         else if contact.bodyB.node?.name == "bullet"
         {
-            HadleBulletCollision(bullet: contact.bodyB.node!, object: contact.bodyA.node!)
+            HandleBulletCollision(bullet: contact.bodyB.node!, object: contact.bodyA.node!)
         }
     }
     
@@ -121,11 +121,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     {
         if contact.bodyA.node?.name == "character"
         {
-            HadleCharacterCollisionEnd(character: contact.bodyA.node!, object: contact.bodyB.node!)
+            HandleCharacterCollisionEnd(character: contact.bodyA.node!, object: contact.bodyB.node!)
         }
         else if contact.bodyB.node?.name == "character"
         {
-            HadleCharacterCollisionEnd(character: contact.bodyB.node!, object: contact.bodyA.node!)
+            HandleCharacterCollisionEnd(character: contact.bodyB.node!, object: contact.bodyA.node!)
         }
     }
     
