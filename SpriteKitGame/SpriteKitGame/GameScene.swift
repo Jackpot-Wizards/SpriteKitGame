@@ -15,18 +15,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var characterNode : Character!
     private var groundNode : SKSpriteNode!
     
-    private var platformNode1 : Platform!
-    private var platformNode2 : Platform!
-    
     private var bullets : Array<Bullet> = Array()
     private var enemies : Array<Enemy> = Array()
+    private var platformList : Array<Platform> = Array()
     
     var gameCount: UInt64 = 0
     
-    func ResetGame() {
+    // Reset Game based on the level
+    func ResetGame(level : String) {
         gameCount = 0
         bullets = [Bullet]()
         enemies = [Enemy]()
+        platformList = [Platform]()
+        
+        // Get the object information from the plist
+        var nsDictionary: NSDictionary?
+        if let path = Bundle.main.path(forResource: level, ofType: "plist") {
+            nsDictionary = NSDictionary(contentsOfFile: path)
+            let plts = nsDictionary!["platform"] as! Array<[String: Any]>
+            
+            for plt in plts {
+                let newPlatform = Platform(dict:plt)!
+                platformList.append(newPlatform)
+                addChild(newPlatform)
+            }
+        }
     }
     
     override func sceneDidLoad() {
@@ -34,11 +47,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         physicsWorld.contactDelegate = self
         
         // Reset Game paramerters
-        ResetGame()
+        ResetGame(level:"level01")
         
         CreateGround()
-        CreatePlatform1()
-        CreatePlatform2()
         CreateCharacter()
         CreateEnemy(xPosition: 400, yPosition: -140)
     }
@@ -165,20 +176,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     
-    override func update(_ currentTime: TimeInterval) {
-
+    override func update(_ currentTime: TimeInterval)
+    {
         // TODO : check overflow
         // TODO : check end condition
         self.gameCount += 1
         
         characterNode.Update()
-        platformNode1.Update()
-        platformNode2.Update()
-        
 
+        // Update platforms
+        for (i, platform) in platformList.enumerated().reversed()
+        {
+            platform.Update()
+            if platform.isDestroyed
+            {
+                platformList.remove(at:i)
+                platform.removeFromParent()
+            }
+        }
         
-        
-        for (i,bullet) in bullets.enumerated().reversed()
+        // Update bullets
+        for (i, bullet) in bullets.enumerated().reversed()
         {
             bullet.Update()
             
@@ -195,7 +213,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             CreateEnemy(xPosition: 400, yPosition: -140)
         }
         
-        for (i,enemy) in enemies.enumerated().reversed()
+        // Update enemies
+        for (i, enemy) in enemies.enumerated().reversed()
         {
             enemy.Update()
             
@@ -239,18 +258,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         groundNode.physicsBody?.isDynamic = false
         groundNode.physicsBody?.categoryBitMask = CollisionCategories.Ground
         groundNode.physicsBody?.collisionBitMask = 0
-    }
-    
-    func CreatePlatform1()
-    {
-        platformNode1 = Platform(600, 100, 2, -600)
-        addChild(platformNode1)
-    }
-    
-    func CreatePlatform2()
-    {
-        platformNode2 = Platform(500, -50, 2, -700)
-        addChild(platformNode2)
     }
     
     func CreateEnemy(xPosition: CGFloat, yPosition: CGFloat)

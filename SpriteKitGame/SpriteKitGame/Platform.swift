@@ -9,6 +9,7 @@
 import Foundation
 import SpriteKit
 
+
 class Platform: GameObject
 {
     var isDestroyed: Bool = false
@@ -16,17 +17,27 @@ class Platform: GameObject
     var initialX: CGFloat?
     var initialY: CGFloat?
     var leftSpeed: CGFloat?
-    var resetPoint: CGFloat?
+
+
+    // Init from dictionay
+    convenience init?(dict: [String : Any]) {
+        let x = dict["x"] as? CGFloat
+        let y = dict["y"] as? CGFloat
+        let speed = dict["speed"] as? CGFloat
+        
+        let width = dict["width"] as? CGFloat
+        let height = dict["height"] as? CGFloat
+        self.init(x!, y!, width!, height!, speed!)
+    }
     
-    init(_ initialX: CGFloat, _ initialY: CGFloat, _ leftSpeed: CGFloat, _ resetPoint: CGFloat)
+    init(_ initialX: CGFloat, _ initialY: CGFloat, _ width: CGFloat, _ height: CGFloat, _ leftSpeed: CGFloat)
     {
-        super.init(imageString: "nextButton", size: CGSize(width: 250.0, height: 15.0))
+        super.init(imageString: "nextButton", size: CGSize(width: width, height: height))
         self.name = "platform"
         
         self.initialX = initialX
         self.initialY = initialY
         self.leftSpeed = leftSpeed
-        self.resetPoint = resetPoint
         
         Start()
     }
@@ -68,9 +79,10 @@ class Platform: GameObject
     
     override func Update()
     {
-        if (self.position.x < self.resetPoint!)
+        // TODO : replace -475
+        if (self.position.x + self.halfWidth! < -475)
         {
-            Reset()
+            isDestroyed = true;
         }
         else
         {
