@@ -15,7 +15,7 @@ class Bullet: GameObject
     // constructor
     override init()
     {
-        super.init(imageString: "bullet", size: CGSize(width: 100.0, height: 100.0))
+        super.init(imageString: "bullet", size: CGSize(width: 30.0, height: 30.0))
         Start()
     }
     

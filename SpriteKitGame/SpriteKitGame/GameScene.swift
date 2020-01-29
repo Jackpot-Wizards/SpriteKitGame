@@ -6,6 +6,7 @@
 //  Copyright © 2020 Jackpot-Wizards. All rights reserved.
 //
 
+import Foundation
 import SpriteKit
 import GameplayKit
 
@@ -13,13 +14,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private var characterNode : Character!
     private var groundNode : SKSpriteNode!
-    private var platformNode : Platform!
+    
+    private var platformNode1 : Platform!
+    private var platformNode2 : Platform!
     
     private var bullets : Array<Bullet> = Array()
     private var enemies : Array<Enemy> = Array()
-    
-    private var characterXSpeed : CGFloat = 0.0
-    private let platformTestSpeed : CGFloat = 1
     
     override func sceneDidLoad() {
         
@@ -29,7 +29,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemies = [Enemy]()
         
         CreateGround()
-        CreatePlatform()
+        CreatePlatform1()
+        CreatePlatform2()
         CreateCharacter()
         CreateEnemy(xPosition: 400, yPosition: -140)
     }
@@ -44,15 +45,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             // despite restitution is set to zero?)
             if ((character.physicsBody?.velocity.dy)! >= 0.1)
             {
-                print("character velocity >= 0.1")
-                print((character.physicsBody?.velocity.dy)!)
+                character.physicsBody?.collisionBitMask = CollisionCategories.Ground
             }
             else
             {
                 // if we were falling when contact happened
-                print("character velocity < 0.1")
-                print((character.physicsBody?.velocity.dy)!)
-//                characterXSpeed = platformTestSpeed
+                character.physicsBody?.collisionBitMask = CollisionCategories.Ground | CollisionCategories.Platform
             }
         }
     }
@@ -62,6 +60,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if (object.name == "platform")
         {
             print("character/platform collision ends")
+            character.physicsBody?.collisionBitMask = CollisionCategories.Ground
             // need to set character speed to 0
 //            characterXSpeed = 0
         }
@@ -158,9 +157,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     override func update(_ currentTime: TimeInterval) {
-        // just for test
+
         characterNode.Update()
-        platformNode.Update()
+        platformNode1.Update()
+        platformNode2.Update()
         
         for (i,bullet) in bullets.enumerated().reversed()
         {
@@ -185,7 +185,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             if enemy.position.x < -475
             {
-                enemy.isDestroyed = true
                 enemies.remove(at: i)
                 enemy.removeFromParent()
             }
@@ -226,10 +225,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         groundNode.physicsBody?.collisionBitMask = 0
     }
     
-    func CreatePlatform()
+    func CreatePlatform1()
     {
-        platformNode = Platform()
-        addChild(platformNode)
+        platformNode1 = Platform(600, 100, 2, -600)
+        addChild(platformNode1)
+    }
+    
+    func CreatePlatform2()
+    {
+        platformNode2 = Platform(500, -50, 2, -700)
+        addChild(platformNode2)
     }
     
     func CreateEnemy(xPosition: CGFloat, yPosition: CGFloat)

@@ -12,7 +12,25 @@ import SpriteKit
 class Platform: GameObject
 {
     var isDestroyed: Bool = false
-    // constructor
+    
+    var initialX: CGFloat?
+    var initialY: CGFloat?
+    var leftSpeed: CGFloat?
+    var resetPoint: CGFloat?
+    
+    init(_ initialX: CGFloat, _ initialY: CGFloat, _ leftSpeed: CGFloat, _ resetPoint: CGFloat)
+    {
+        super.init(imageString: "nextButton", size: CGSize(width: 250.0, height: 15.0))
+        self.name = "platform"
+        
+        self.initialX = initialX
+        self.initialY = initialY
+        self.leftSpeed = leftSpeed
+        self.resetPoint = resetPoint
+        
+        Start()
+    }
+    
     override init()
     {
         super.init(imageString: "nextButton", size: CGSize(width: 250.0, height: 15.0))
@@ -30,17 +48,15 @@ class Platform: GameObject
     
     override func Reset()
     {
-        position.x = 300;
-        position.y = 0;
+        position.x = initialX!
     }
     
     override func Start()
     {
         self.zPosition = 2
         
-        // do random here
-        self.position.x = 300;
-        self.position.y = 0;
+        self.position.x = initialX!
+        self.position.y = initialY!
         
         self.physicsBody = SKPhysicsBody(rectangleOf: self.size)
         self.physicsBody?.isDynamic = false
@@ -52,13 +68,13 @@ class Platform: GameObject
     
     override func Update()
     {
-        if (position.x < -415)
+        if (self.position.x < self.resetPoint!)
         {
             Reset()
         }
         else
         {
-            position.x -= 1
+            self.position.x -= leftSpeed!
         }
     }
 }
