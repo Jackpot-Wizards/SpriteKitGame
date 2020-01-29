@@ -21,12 +21,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var bullets : Array<Bullet> = Array()
     private var enemies : Array<Enemy> = Array()
     
+    var gameCount: UInt64 = 0
+    
+    func ResetGame() {
+        gameCount = 0
+        bullets = [Bullet]()
+        enemies = [Enemy]()
+    }
+    
     override func sceneDidLoad() {
         
         physicsWorld.contactDelegate = self
         
-        bullets = [Bullet]()
-        enemies = [Enemy]()
+        // Reset Game paramerters
+        ResetGame()
         
         CreateGround()
         CreatePlatform1()
@@ -45,6 +53,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             // despite restitution is set to zero?)
             if ((character.physicsBody?.velocity.dy)! >= 0.1)
             {
+                // need to check the normalvector
                 character.physicsBody?.collisionBitMask = CollisionCategories.Ground
             }
             else
@@ -158,9 +167,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func update(_ currentTime: TimeInterval) {
 
+        // TODO : check overflow
+        // TODO : check end condition
+        self.gameCount += 1
+        
         characterNode.Update()
         platformNode1.Update()
         platformNode2.Update()
+        
+
+        
         
         for (i,bullet) in bullets.enumerated().reversed()
         {
