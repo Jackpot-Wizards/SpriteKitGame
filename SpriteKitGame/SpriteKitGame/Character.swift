@@ -52,7 +52,7 @@ class Character: GameObject
         self.physicsBody?.restitution = 0.0
         self.physicsBody?.usesPreciseCollisionDetection = true
         self.physicsBody?.categoryBitMask = CollisionCategories.Character
-        self.physicsBody?.contactTestBitMask = CollisionCategories.Platform
+        self.physicsBody?.contactTestBitMask = CollisionCategories.Platform + CollisionCategories.Enemy
         self.physicsBody?.collisionBitMask = CollisionCategories.Ground
     }
     

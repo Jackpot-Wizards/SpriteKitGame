@@ -80,13 +80,21 @@ class GameViewController: UIViewController, GameManager {
     // GameManager
     func PresentEndScene() {
 //        BackButtonOutlet.isHidden = false
-//        SetScene(sceneName: "EndScene")
+        StartButtonOutlet.isHidden = false
+        SetScene(sceneName: "EndScene")
     }
     
     
     @IBAction func OnClickStartButton(_ sender: UIButton) {
+        if let gameScene = currentScene as? GameScene
+        {
+            gameScene.ResetGame(level: "level01")
+            gameScene.isGameEnd = false
+        } else {
+            // Change to GameScene
+            SetScene(sceneName: "GameScene")
+        }
         StartButtonOutlet.isHidden = true
-        // Change to GameScene
-        SetScene(sceneName: "GameScene")
+        
     }
 }

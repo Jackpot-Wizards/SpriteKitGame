@@ -13,6 +13,7 @@ import GameplayKit
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var gameManager: GameManager?
+    var isGameEnd : Bool = false
     
     private var characterNode : Character!
     private var groundNode : SKSpriteNode!
@@ -75,6 +76,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 character.physicsBody?.collisionBitMask = CollisionCategories.Ground | CollisionCategories.Platform
             }
         }
+        else if(object.name == "enemy")
+        {
+            self.isGameEnd = true
+//            self.gameManager?.PresentStartScene()
+            self.gameManager?.PresentEndScene()
+        } else {}
     }
     
     func HandleCharacterCollisionEnd(character: SKNode, object: SKNode)
@@ -184,63 +191,69 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // TODO : check end condition
         self.gameCount += 1
         
-        characterNode.Update()
+        if false == self.isGameEnd
+        {
+            characterNode.Update()
 
-        // Update platforms
-        for (i, platform) in platformList.enumerated().reversed()
-        {
-            platform.Update()
-            if platform.isDestroyed
+            // Update platforms
+            for (i, platform) in platformList.enumerated().reversed()
             {
-                platformList.remove(at:i)
-                platform.removeFromParent()
+                platform.Update()
+                if platform.isDestroyed
+                {
+                    platformList.remove(at:i)
+                    platform.removeFromParent()
+                }
             }
-        }
-        
-        // Update bullets
-        for (i, bullet) in bullets.enumerated().reversed()
-        {
-            bullet.Update()
             
-            if bullet.position.x > 475
+            // Update bullets
+            for (i, bullet) in bullets.enumerated().reversed()
             {
-                bullets.remove(at: i)
-                bullet.removeFromParent()
+                bullet.Update()
+                
+                if bullet.position.x > 475
+                {
+                    bullets.remove(at: i)
+                    bullet.removeFromParent()
+                }
             }
-        }
-        
-        if (enemies.count == 0)
-        {
-            // this is just for testing
-            CreateEnemy(xPosition: 400, yPosition: -140)
-        }
-        
-        // Update enemies
-        for (i, enemy) in enemies.enumerated().reversed()
-        {
-            enemy.Update()
             
-            if enemy.position.x < -475
+            if (enemies.count == 0)
             {
-                enemies.remove(at: i)
-                enemy.removeFromParent()
+                // this is just for testing
+                CreateEnemy(xPosition: 400, yPosition: -140)
+            }
+            
+            // Update enemies
+            for (i, enemy) in enemies.enumerated().reversed()
+            {
+                enemy.Update()
+                
+                if enemy.position.x < -475
+                {
+                    enemies.remove(at: i)
+                    enemy.removeFromParent()
+                }
             }
         }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
     {
-        for touch in touches {
-            let location = touch.location(in: self)
-            let node : SKNode = self.atPoint(location)
-            
-            if node.name == "gunControl" {
-                print("gunControl clicked")
-                CreateBullet()
-            }
-            else
-            {
-                characterNode.Jump()
+        if false == self.isGameEnd
+        {
+            for touch in touches {
+                let location = touch.location(in: self)
+                let node : SKNode = self.atPoint(location)
+                
+                if node.name == "gunControl" {
+                    print("gunControl clicked")
+                    CreateBullet()
+                }
+                else
+                {
+                    characterNode.Jump()
+                }
             }
         }
     }
