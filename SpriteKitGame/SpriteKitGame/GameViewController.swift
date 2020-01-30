@@ -12,13 +12,18 @@ import GameplayKit
 
 class GameViewController: UIViewController, GameManager {
 
+    // Outlets
+    @IBOutlet weak var StartButtonOutlet: UIButton!
+    
+    // Current scence
     var currentScene: SKScene?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Set scene
-        SetScene(sceneName: "GameScene")
+        // Set scene with StartScene
+        SetScene(sceneName: "StartScene")
     }
 
     override var shouldAutorotate: Bool {
@@ -41,7 +46,7 @@ class GameViewController: UIViewController, GameManager {
     /**
      Set current scene to view
       - Parameters:
-       - sceneName : Name of the scene. It is the file name
+       - sceneName : Name of the scene.
       - Returns: None
      */
     func SetScene(sceneName: String)
@@ -67,12 +72,21 @@ class GameViewController: UIViewController, GameManager {
         }
     }
     
+    // GameManager
     func PresentStartScene() {
-//        StartButtonOutlet.isHidden = false
+        StartButtonOutlet.isHidden = false
     }
     
+    // GameManager
     func PresentEndScene() {
 //        BackButtonOutlet.isHidden = false
 //        SetScene(sceneName: "EndScene")
+    }
+    
+    
+    @IBAction func OnClickStartButton(_ sender: UIButton) {
+        StartButtonOutlet.isHidden = true
+        // Change to GameScene
+        SetScene(sceneName: "GameScene")
     }
 }
