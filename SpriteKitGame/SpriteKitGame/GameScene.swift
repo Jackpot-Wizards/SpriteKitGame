@@ -12,6 +12,8 @@ import GameplayKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
+    var gameManager: GameManager?
+    
     private var characterNode : Character!
     private var groundNode : SKSpriteNode!
     

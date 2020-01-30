@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3047A08623E2078100F2FB2C /* player-run.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3047A08523E2078100F2FB2C /* player-run.atlas */; };
 		3FA45AA723E20A060013F0C4 /* level01.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FA45AA623E20A060013F0C4 /* level01.plist */; };
+		3FA45AA923E2540B0013F0C4 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA45AA823E2540B0013F0C4 /* GameManager.swift */; };
 		F40AD34323DCAE58009253FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40AD34223DCAE58009253FC /* AppDelegate.swift */; };
 		F40AD34523DCAE58009253FC /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = F40AD34423DCAE58009253FC /* GameScene.sks */; };
 		F40AD34723DCAE58009253FC /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = F40AD34623DCAE58009253FC /* Actions.sks */; };
@@ -32,6 +33,7 @@
 /* Begin PBXFileReference section */
 		3047A08523E2078100F2FB2C /* player-run.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = "player-run.atlas"; sourceTree = "<group>"; };
 		3FA45AA623E20A060013F0C4 /* level01.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = level01.plist; sourceTree = "<group>"; };
+		3FA45AA823E2540B0013F0C4 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		F40AD33F23DCAE58009253FC /* SpriteKitGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpriteKitGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F40AD34223DCAE58009253FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F40AD34423DCAE58009253FC /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				F40AD36723DCC687009253FC /* StarPoint.swift */,
 				F4ED631023DD20610059CC84 /* Bullet.swift */,
 				F4ED631623DD45B80059CC84 /* Enemy.swift */,
+				3FA45AA823E2540B0013F0C4 /* GameManager.swift */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -203,6 +206,7 @@
 				F40AD36223DCAFF1009253FC /* Platform.swift in Sources */,
 				F40AD34923DCAE58009253FC /* GameScene.swift in Sources */,
 				F40AD36623DCB21F009253FC /* GameObject.swift in Sources */,
+				3FA45AA923E2540B0013F0C4 /* GameManager.swift in Sources */,
 				F40AD36823DCC687009253FC /* StarPoint.swift in Sources */,
 				F40AD35B23DCAEF7009253FC /* GameProtocol.swift in Sources */,
 				F40AD36423DCAFFD009253FC /* Character.swift in Sources */,

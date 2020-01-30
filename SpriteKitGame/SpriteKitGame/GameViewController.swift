@@ -10,32 +10,15 @@ import UIKit
 import SpriteKit
 import GameplayKit
 
-class GameViewController: UIViewController {
+class GameViewController: UIViewController, GameManager {
 
+    var currentScene: SKScene?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Load 'GameScene.sks' as a GKScene. This provides gameplay related content
-        // including entities and graphs.
-        if let scene = GKScene(fileNamed: "GameScene") {
-            
-            // Get the SKScene from the loaded GKScene
-            if let sceneNode = scene.rootNode as! GameScene? {
-
-                // Set the scale mode to scale to fit the window
-                sceneNode.scaleMode = .aspectFill
-                
-                // Present the scene
-                if let view = self.view as! SKView? {
-                    view.presentScene(sceneNode)
-                    
-                    view.ignoresSiblingOrder = true
-                    
-                    view.showsFPS = true
-                    view.showsNodeCount = true
-                }
-            }
-        }
+        // Set scene
+        SetScene(sceneName: "GameScene")
     }
 
     override var shouldAutorotate: Bool {
@@ -52,5 +35,44 @@ class GameViewController: UIViewController {
 
     override var prefersStatusBarHidden: Bool {
         return true
+    }
+    
+
+    /**
+     Set current scene to view
+      - Parameters:
+       - sceneName : Name of the scene. It is the file name
+      - Returns: None
+     */
+    func SetScene(sceneName: String)
+    {
+        if let view = self.view as! SKView?
+        {
+            // Load the SKScene from 'GameScene.sks'
+            currentScene = SKScene(fileNamed: sceneName)
+            
+            if let gameScene = currentScene as? GameScene
+            {
+                gameScene.gameManager = self
+            }
+            
+            // Set the scale mode to scale to fit the window
+            currentScene?.scaleMode = .aspectFill
+                            
+            // Set properties of the View
+            view.ignoresSiblingOrder = true
+        
+            // Present the scene
+            view.presentScene(currentScene)
+        }
+    }
+    
+    func PresentStartScene() {
+//        StartButtonOutlet.isHidden = false
+    }
+    
+    func PresentEndScene() {
+//        BackButtonOutlet.isHidden = false
+//        SetScene(sceneName: "EndScene")
     }
 }
