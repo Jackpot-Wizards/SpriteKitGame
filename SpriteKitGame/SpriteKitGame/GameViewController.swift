@@ -14,6 +14,8 @@ class GameViewController: UIViewController, GameManager {
 
     // Outlets
     @IBOutlet weak var StartButtonOutlet: UIButton!
+    @IBOutlet weak var labelLife: UILabel!
+    @IBOutlet weak var labelScore: UILabel!
     
     // Current scence
     var currentScene: SKScene?
@@ -83,6 +85,16 @@ class GameViewController: UIViewController, GameManager {
         StartButtonOutlet.isHidden = false
         SetScene(sceneName: "EndScene")
     }
+    
+    // GameManager
+    func UpdateScore(value:Int) {
+        labelScore.text = "SCORE: \(value)"
+    }
+    // GameManager
+    func UpdateLife(value:Int) {
+        labelLife.text = "LIFE: \(value)"
+    }
+    
     
     
     @IBAction func OnClickStartButton(_ sender: UIButton) {

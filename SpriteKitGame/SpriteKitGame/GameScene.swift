@@ -22,11 +22,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var enemies : Array<Enemy> = Array()
     private var platformList : Array<Platform> = Array()
     
-    var gameCount: UInt64 = 0
+    var gameCount: Int = 0
+    var gameScore: Int = 0
+    var gameLife: Int = 3
     
     // Reset Game based on the level
     func ResetGame(level : String) {
         gameCount = 0
+        gameScore = 0
+        gameLife = 3
+        
         bullets = [Bullet]()
         enemies = [Enemy]()
         platformList = [Platform]()
@@ -78,9 +83,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         else if(object.name == "enemy")
         {
-            self.isGameEnd = true
-//            self.gameManager?.PresentStartScene()
-            self.gameManager?.PresentEndScene()
+            (object as? Enemy)!.isDestroyed = true
+            
+            self.gameLife -= 1
+            gameManager?.UpdateLife(value: self.gameLife)
+            if 0 == self.gameLife {
+                self.isGameEnd = true
+                self.gameManager?.PresentEndScene()
+            }
+            
         } else {}
     }
     
@@ -191,6 +202,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // TODO : check end condition
         self.gameCount += 1
         
+        if(0 == self.gameCount%60) {
+            gameManager?.UpdateScore(value: self.gameCount/60)
+        }
+        
         if false == self.isGameEnd
         {
             characterNode.Update()
@@ -229,7 +244,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             {
                 enemy.Update()
                 
-                if enemy.position.x < -475
+                if ((enemy.position.x < -475) || (enemy.isDestroyed))
                 {
                     enemies.remove(at: i)
                     enemy.removeFromParent()
