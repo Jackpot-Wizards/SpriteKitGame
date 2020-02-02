@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3022EDE423E7590C00FCC2F8 /* player-jump.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3022EDE323E7590C00FCC2F8 /* player-jump.atlas */; };
 		3047A08623E2078100F2FB2C /* player-run.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3047A08523E2078100F2FB2C /* player-run.atlas */; };
 		3FA45AA723E20A060013F0C4 /* level01.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FA45AA623E20A060013F0C4 /* level01.plist */; };
 		3FA45AA923E2540B0013F0C4 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA45AA823E2540B0013F0C4 /* GameManager.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3022EDE323E7590C00FCC2F8 /* player-jump.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = "player-jump.atlas"; sourceTree = "<group>"; };
 		3047A08523E2078100F2FB2C /* player-run.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = "player-run.atlas"; sourceTree = "<group>"; };
 		3FA45AA623E20A060013F0C4 /* level01.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = level01.plist; sourceTree = "<group>"; };
 		3FA45AA823E2540B0013F0C4 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 		3047A07F23E1E7AF00F2FB2C /* Sprites */ = {
 			isa = PBXGroup;
 			children = (
+				3022EDE323E7590C00FCC2F8 /* player-jump.atlas */,
 				3047A08523E2078100F2FB2C /* player-run.atlas */,
 			);
 			name = Sprites;
@@ -200,6 +203,7 @@
 			files = (
 				3FE23DC323E26E9D00C3412D /* EndScene.sks in Resources */,
 				F40AD34E23DCAE58009253FC /* Main.storyboard in Resources */,
+				3022EDE423E7590C00FCC2F8 /* player-jump.atlas in Resources */,
 				3FA45AAF23E259190013F0C4 /* StartScene.sks in Resources */,
 				3FA45AA723E20A060013F0C4 /* level01.plist in Resources */,
 				F40AD34523DCAE58009253FC /* GameScene.sks in Resources */,

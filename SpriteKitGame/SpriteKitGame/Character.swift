@@ -11,7 +11,29 @@ import SpriteKit
 
 class Character: GameObject
 {
+    enum playerState {
+        case running
+        case jumping
+        case run_shooting
+        case jump_shooting
+        case taking_damage
+        
+        func toString() -> String {
+            switch self {
+            case playerState.running:
+                return "running"
+            case playerState.jumping:
+                return "jumping"
+            default:
+                return ""
+            }
+        }
+    }
+    
+    var currState: playerState?
+    
     private var runFrames: [SKTexture] = []
+    private var jumpFrames: [SKTexture] = []
     
     var jumpAction: SKAction!
     
@@ -23,7 +45,7 @@ class Character: GameObject
     override init()
     {
         super.init(imageString: "character", size: CGSize(width: 100.0, height: 100.0))
-        buildRunAnim()
+        buildAnimations()
         Start()
         animate()
     }
@@ -56,30 +78,58 @@ class Character: GameObject
         self.physicsBody?.collisionBitMask = CollisionCategories.Ground
     }
     
-    func buildRunAnim() {
+    func buildAnimations() {
+        currState = playerState.running
+        
         let runAnimatedAtlas = SKTextureAtlas(named: "player-run")
         
-        let numImages = runAnimatedAtlas.textureNames.count
-        for i in 1...numImages {
+        let numRunImages = runAnimatedAtlas.textureNames.count
+        for i in 1...numRunImages {
             let runTextureName = "player-run-\(i)"
             runFrames.append(runAnimatedAtlas.textureNamed(runTextureName))
         }
+        
+        let jumpAnimatedAtlas = SKTextureAtlas(named: "player-jump")
+        
+        let numJumpImages = jumpAnimatedAtlas.textureNames.count
+        for i in 1...numJumpImages {
+            let jumpTextureName = "player-jump-\(i)"
+            jumpFrames.append(jumpAnimatedAtlas.textureNamed(jumpTextureName))
+        }
+        
     }
     
     func animate() {
-      self.run(SKAction.repeatForever(
-        SKAction.animate(with: runFrames,
-                         timePerFrame: 0.1,
-                         resize: false,
-                         restore: true)),
-        withKey:"running")
+        if let state = currState {
+            switch state {
+            case playerState.running:
+                self.run(SKAction.repeatForever(
+                  SKAction.animate(with: runFrames,
+                                   timePerFrame: 0.1,
+                                   resize: false,
+                                   restore: true)),
+                         withKey:"running")
+            case playerState.jumping:
+                self.run(SKAction.repeatForever(
+                    SKAction.animate(with: jumpFrames,
+                                     timePerFrame: 0.1,
+                                     resize: false,
+                                     restore: true)),
+                         withKey:"jumping")
+            default:
+                break
+            }
+        }
     }
     
     override func Update()
     {
-        if ((self.physicsBody?.velocity.dy)! < 0.1 && (self.physicsBody?.velocity.dy)! >= -0.1 )
+        if ((self.physicsBody?.velocity.dy)! < 0.1 && (self.physicsBody?.velocity.dy)! >= -0.1 && eligibleToJump == false)
         {
             eligibleToJump = true
+            self.removeAction(forKey: "jumping")
+            currState = playerState.running
+            animate()
         }
 
         // TODO: use state machine here
@@ -103,6 +153,10 @@ class Character: GameObject
     func Jump()
     {
         print("jump")
+        self.removeAction(forKey: "running")
+        currState = playerState.jumping
+        animate()
+        
         print((self.physicsBody?.velocity.dy)!)
         if ((self.physicsBody?.velocity.dy)! < 0.1 && (self.physicsBody?.velocity.dy)! > -0.1 && eligibleToJump == true)
         {
