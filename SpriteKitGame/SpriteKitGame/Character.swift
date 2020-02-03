@@ -44,7 +44,7 @@ class Character: GameObject
     // constructor
     override init()
     {
-        super.init(imageString: "character", size: CGSize(width: 100.0, height: 100.0))
+        super.init(imageString: "character", size: CGSize(width: 200.0, height: 200.0))
         buildAnimations()
         Start()
         animate()
@@ -67,7 +67,8 @@ class Character: GameObject
     {
         self.zPosition = 2
         
-        self.physicsBody = SKPhysicsBody(rectangleOf: self.size)
+        self.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 50, height: 112))
+        self.physicsBody?.mass = 0.44
         self.physicsBody?.isDynamic = true
         self.physicsBody?.angularDamping = 0.0
         self.physicsBody?.allowsRotation = false
