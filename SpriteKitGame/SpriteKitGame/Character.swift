@@ -17,17 +17,6 @@ class Character: GameObject
         case run_shooting
         case jump_shooting
         case taking_damage
-        
-        func toString() -> String {
-            switch self {
-            case playerState.running:
-                return "running"
-            case playerState.jumping:
-                return "jumping"
-            default:
-                return ""
-            }
-        }
     }
     
     var currState: playerState?
