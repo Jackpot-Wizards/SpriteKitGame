@@ -60,6 +60,7 @@ class Platform: GameObject
     override func Reset()
     {
         position.x = initialX!
+        isDestroyed = false
     }
     
     override func Start()

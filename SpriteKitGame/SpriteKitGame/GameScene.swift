@@ -20,7 +20,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private var bullets : Array<Bullet> = Array()
     private var enemies : Array<Enemy> = Array()
-    private var platformList : Array<Platform> = Array()
+    private var platformListOnScreen : Array<Platform> = Array()
+    private var platformListPool : Array<Array<Platform>> = Array(Array())
     
     var gameCount: Int = 0
     var gameScore: Int = 0
@@ -34,20 +35,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         bullets = [Bullet]()
         enemies = [Enemy]()
-        platformList = [Platform]()
+        platformListOnScreen = [Platform]()
         
         // Get the object information from the plist
+
+            
         var nsDictionary: NSDictionary?
         if let path = Bundle.main.path(forResource: level, ofType: "plist") {
             nsDictionary = NSDictionary(contentsOfFile: path)
-            let plts = nsDictionary!["platform"] as! Array<[String: Any]>
-            
-            for plt in plts {
-                let newPlatform = Platform(dict:plt)!
-                platformList.append(newPlatform)
-                addChild(newPlatform)
+                
+            for idx in 1...9 {
+                let platformPlist = "platforms" + String(idx)
+                platformListPool.append([Platform]())
+                let plts = nsDictionary![platformPlist] as! Array<[String: Any]>
+                
+                for plt in plts {
+                    let newPlatform = Platform(dict:plt)!
+                    platformListPool[idx-1].append(newPlatform)
+//                    platformListOnScreen.append(newPlatform)
+//                    addChild(newPlatform)
+                }
             }
         }
+        
+        addNewPlatformsToScreen()
+        
     }
     
     override func sceneDidLoad() {
@@ -55,7 +67,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         physicsWorld.contactDelegate = self
         
         // Reset Game paramerters
-        ResetGame(level:"level01")
+        ResetGame(level:"platformsLevel1")
         
         CreateGround()
         CreateCharacter()
@@ -211,14 +223,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             characterNode.Update()
 
             // Update platforms
-            for (i, platform) in platformList.enumerated().reversed()
+            for (i, platform) in platformListOnScreen.enumerated().reversed()
             {
                 platform.Update()
                 if platform.isDestroyed
                 {
-                    platformList.remove(at:i)
+                    platformListOnScreen.remove(at:i)
                     platform.removeFromParent()
+                    platform.Reset()
                 }
+            }
+            
+            if(platformListOnScreen.count < 3) {
+                addNewPlatformsToScreen()
             }
             
             // Update bullets
@@ -308,5 +325,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bulletNode.position.y = characterNode.position.y - 12
         bullets.append(bulletNode)
         addChild(bulletNode)
+    }
+    
+    
+    func addNewPlatformsToScreen() {
+        let selIdx = GameScene.getRandomNumber(upperBound: (platformListPool.count))
+        for plt in platformListPool[selIdx] {
+            if plt.parent == nil {
+                platformListOnScreen.append(plt)
+                addChild(plt)
+            }
+        }
+    }
+    
+    static func getRandomNumber(upperBound : Int) -> Int {
+        let randomSource = GKARC4RandomSource()
+        return (randomSource.nextInt(upperBound: upperBound))
     }
 }
