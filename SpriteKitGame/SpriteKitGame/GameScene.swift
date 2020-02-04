@@ -27,14 +27,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private let platformDuration = 360                              // Durations between platforms(ms)
     
     var gameCount: Int = 0
-    var gameScore: Int = 0
-    var gameLife: Int = 3
+    var gameScore: Int = GameOptions.InitScore
+    var gameLife: Int = GameOptions.InitLife
     
     // Reset Game based on the level
     func ResetGame(level : String) {
         gameCount = 0
-        gameScore = 0
-        gameLife = 3
+        gameScore = GameOptions.InitScore
+        gameLife = GameOptions.InitLife
         
         bullets = [Bullet]()
         enemies = [Enemy]()

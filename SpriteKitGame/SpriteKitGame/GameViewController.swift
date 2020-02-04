@@ -61,6 +61,8 @@ class GameViewController: UIViewController, GameManager {
             if let gameScene = currentScene as? GameScene
             {
                 gameScene.gameManager = self
+                UpdateScore(value: GameOptions.InitScore)
+                UpdateLife(value: GameOptions.InitLife)
             }
             
             // Set the scale mode to scale to fit the window
