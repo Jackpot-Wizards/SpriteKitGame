@@ -26,7 +26,7 @@ class Character: GameObject
     
     var jumpAction: SKAction!
     
-    var eligibleToJump = true
+    var numOfJumps = 2
     var isInFirstJump: Bool = true
     var characterSpeed = 0.0
     
@@ -114,9 +114,9 @@ class Character: GameObject
     
     override func Update()
     {
-        if ((self.physicsBody?.velocity.dy)! < 0.1 && (self.physicsBody?.velocity.dy)! >= -0.1 && eligibleToJump == false)
+        if ((self.physicsBody?.velocity.dy)! < 0.1 && (self.physicsBody?.velocity.dy)! >= -0.1 && numOfJumps < 2)
         {
-            eligibleToJump = true
+            numOfJumps = 2
             self.removeAction(forKey: "jumping")
             currState = playerState.running
             animate()
@@ -148,13 +148,14 @@ class Character: GameObject
         animate()
         
         print((self.physicsBody?.velocity.dy)!)
-        if ((self.physicsBody?.velocity.dy)! < 0.1 && (self.physicsBody?.velocity.dy)! > -0.1 && eligibleToJump == true)
+        if ((self.physicsBody?.velocity.dy)! < 0.1 && (self.physicsBody?.velocity.dy)! > -0.1 && numOfJumps == 2)
         {
+            numOfJumps -= 1
             FirstJump()
         }
-        else if (eligibleToJump)
+        else if (numOfJumps == 1)
         {
-            eligibleToJump = false
+            numOfJumps -= 1
             SecondJump()
         }
     }
