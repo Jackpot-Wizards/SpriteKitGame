@@ -20,8 +20,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private var bullets : Array<Bullet> = Array()
     private var enemies : Array<Enemy> = Array()
-    private var platformListOnScreen : Array<Platform> = Array()
-    private var platformListPool : Array<Array<Platform>> = Array(Array())
+    
+    // For the platforms
+    private var platformListOnScreen : Array<Platform> = Array()    // List of platforms on the screen
+    private var platformController : PlatformController?            // Platfrom controller(generator)
+    private let platformDuration = 360                              // Durations between platforms(ms)
     
     var gameCount: Int = 0
     var gameScore: Int = 0
@@ -37,29 +40,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemies = [Enemy]()
         platformListOnScreen = [Platform]()
         
-        // Get the object information from the plist
-
-            
-        var nsDictionary: NSDictionary?
-        if let path = Bundle.main.path(forResource: level, ofType: "plist") {
-            nsDictionary = NSDictionary(contentsOfFile: path)
-                
-            for idx in 1...9 {
-                let platformPlist = "platforms" + String(idx)
-                platformListPool.append([Platform]())
-                let plts = nsDictionary![platformPlist] as! Array<[String: Any]>
-                
-                for plt in plts {
-                    let newPlatform = Platform(dict:plt)!
-                    platformListPool[idx-1].append(newPlatform)
-//                    platformListOnScreen.append(newPlatform)
-//                    addChild(newPlatform)
-                }
-            }
-        }
+        // Initialize platformController
+        platformController = PlatformController(level)
+        
         
         addNewPlatformsToScreen()
-        
     }
     
     override func sceneDidLoad() {
@@ -234,9 +219,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             }
             
-            if(platformListOnScreen.count < 3) {
+            // Add new platfroms to the screen in every 'platformDuration' duration
+            if(0 == self.gameCount%platformDuration) {
                 addNewPlatformsToScreen()
             }
+            
             
             // Update bullets
             for (i, bullet) in bullets.enumerated().reversed()
@@ -327,19 +314,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(bulletNode)
     }
     
-    
-    func addNewPlatformsToScreen() {
-        let selIdx = GameScene.getRandomNumber(upperBound: (platformListPool.count))
-        for plt in platformListPool[selIdx] {
-            if plt.parent == nil {
-                platformListOnScreen.append(plt)
-                addChild(plt)
+    /**
+     Add new platforms to the screen from the platform list pool
+     */
+    func addNewPlatformsToScreen()
+    {
+        if let newPlatformList = platformController?.getNewPlatformList()
+        {
+            for plt in newPlatformList
+            {
+                if plt.parent == nil
+                {
+                    platformListOnScreen.append(plt)
+                    addChild(plt)
+                }
             }
         }
     }
-    
-    static func getRandomNumber(upperBound : Int) -> Int {
-        let randomSource = GKARC4RandomSource()
-        return (randomSource.nextInt(upperBound: upperBound))
-    }
+
 }
