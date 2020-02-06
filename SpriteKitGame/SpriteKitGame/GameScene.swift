@@ -288,7 +288,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func CreateGround()
     {
         groundNode = self.childNode(withName: "//groundNode") as? SKSpriteNode
-        groundNode.physicsBody = SKPhysicsBody(rectangleOf: groundNode.size)
+        groundNode.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 896.0, height: 45))
         groundNode.physicsBody?.isDynamic = false
         groundNode.physicsBody?.restitution = 0
         groundNode.physicsBody?.categoryBitMask = CollisionCategories.Ground
