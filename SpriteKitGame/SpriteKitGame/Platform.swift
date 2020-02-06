@@ -32,7 +32,7 @@ class Platform: GameObject
     
     init(_ initialX: CGFloat, _ initialY: CGFloat, _ width: CGFloat, _ height: CGFloat, _ leftSpeed: CGFloat)
     {
-        super.init(imageString: "nextButton", size: CGSize(width: width, height: height))
+        super.init(imageString: "platform", size: CGSize(width: width, height: height))
         self.name = "platform"
         
         self.initialX = initialX
@@ -44,7 +44,7 @@ class Platform: GameObject
     
     override init()
     {
-        super.init(imageString: "nextButton", size: CGSize(width: 250.0, height: 15.0))
+        super.init(imageString: "platform", size: CGSize(width: 250.0, height: 15.0))
         self.name = "platform"
         Start()
     }
