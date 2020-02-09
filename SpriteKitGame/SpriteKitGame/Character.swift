@@ -114,6 +114,11 @@ class Character: GameObject
     
     override func Update()
     {
+        if self.position.x != 0
+        {
+            self.position.x = 0
+        }
+        
         if ((self.physicsBody?.velocity.dy)! < 0.1 && (self.physicsBody?.velocity.dy)! >= -0.1 && numOfJumps < 2)
         {
             numOfJumps = 2
