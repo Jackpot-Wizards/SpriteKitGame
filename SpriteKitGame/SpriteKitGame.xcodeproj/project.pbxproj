@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3002F97323F0BDE200509E62 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3002F97223F0BDE200509E62 /* Background.swift */; };
 		3022EDE423E7590C00FCC2F8 /* player-jump.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3022EDE323E7590C00FCC2F8 /* player-jump.atlas */; };
 		3047A08623E2078100F2FB2C /* player-run.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3047A08523E2078100F2FB2C /* player-run.atlas */; };
 		3FA45AA723E20A060013F0C4 /* platformsLevel1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FA45AA623E20A060013F0C4 /* platformsLevel1.plist */; };
@@ -38,6 +39,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3002F97223F0BDE200509E62 /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		3022EDE323E7590C00FCC2F8 /* player-jump.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = "player-jump.atlas"; sourceTree = "<group>"; };
 		3047A08523E2078100F2FB2C /* player-run.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = "player-run.atlas"; sourceTree = "<group>"; };
 		3FA45AA623E20A060013F0C4 /* platformsLevel1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = platformsLevel1.plist; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				F4ED631023DD20610059CC84 /* Bullet.swift */,
 				F4ED631623DD45B80059CC84 /* Enemy.swift */,
 				3FA45AA823E2540B0013F0C4 /* GameManager.swift */,
+				3002F97223F0BDE200509E62 /* Background.swift */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 				F40AD36623DCB21F009253FC /* GameObject.swift in Sources */,
 				3FA45AA923E2540B0013F0C4 /* GameManager.swift in Sources */,
 				F40AD36823DCC687009253FC /* StarPoint.swift in Sources */,
+				3002F97323F0BDE200509E62 /* Background.swift in Sources */,
 				F40AD35B23DCAEF7009253FC /* GameProtocol.swift in Sources */,
 				3FD431BD23E9011C005FBA7D /* GameOptions.swift in Sources */,
 				F40AD36423DCAFFD009253FC /* Character.swift in Sources */,

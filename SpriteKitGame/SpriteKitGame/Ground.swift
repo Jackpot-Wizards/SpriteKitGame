@@ -41,7 +41,7 @@ class Ground: GameObject {
     
     override func Start()
     {
-        self.zPosition = 1
+        self.zPosition = 2
         
         self.position.x = initialX!
         self.position.y = initialY!

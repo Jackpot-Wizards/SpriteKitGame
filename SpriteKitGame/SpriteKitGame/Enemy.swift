@@ -34,7 +34,7 @@ class Enemy: GameObject
     
     override func Start()
     {
-        self.zPosition = 2
+        self.zPosition = 3
         
         self.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 10, height: self.size.height))
         self.physicsBody?.isDynamic = true

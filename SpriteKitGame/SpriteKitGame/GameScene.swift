@@ -18,6 +18,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var characterNode : Character!
     private var groundNode1 : Ground?
     private var groundNode2 : Ground?
+    private var backGroundNode1: Background?
+    private var backGroundNode2: Background?
+    private var middleGroundNode1: Background?
+    private var middleGroundNode2: Background?
     
     private var bullets : Array<Bullet> = Array()
     private var enemies : Array<Enemy> = Array()
@@ -55,9 +59,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Reset Game paramerters
         ResetGame(level:"platformsLevel1")
         
+        CreateBackGround()
         CreateGround()
-        CreateCharacter()
         CreateEnemy(xPosition: 400, yPosition: -140)
+        CreateCharacter()
     }
 
     func HandleCharacterCollision(character: SKNode, object: SKNode, contactPoint: CGPoint, contactNormal: CGVector)
@@ -214,6 +219,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             characterNode.Update()
             groundNode1?.Update()
             groundNode2?.Update()
+            backGroundNode1?.Update()
+            backGroundNode2?.Update()
+            middleGroundNode1?.Update()
+            middleGroundNode2?.Update()
 
             // Update platforms
             for (i, platform) in platformListOnScreen.enumerated().reversed()
@@ -289,7 +298,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func CreateCharacter()
     {
         characterNode = Character()
-        characterNode.position = CGPoint(x: -300, y: -80)
+        characterNode.position = CGPoint(x: -290, y: -80)
         addChild(characterNode)
     }
     
@@ -301,9 +310,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(groundNode2!)
     }
     
+    func CreateBackGround() {
+        backGroundNode1 = Background(5.894, 0, textureSelector: 0)
+        backGroundNode2 = Background(913.672, 0, textureSelector: 0)
+        addChild(backGroundNode1!)
+        addChild(backGroundNode2!)
+        middleGroundNode1 = Background(5.894, 0, textureSelector: 1)
+        middleGroundNode2 = Background(913.672, 0, textureSelector: 1)
+        addChild(middleGroundNode1!)
+        addChild(middleGroundNode2!)
+    }
+    
     func CreateEnemy(xPosition: CGFloat, yPosition: CGFloat)
     {
-        var enemyNode : Enemy = Enemy()
+        let enemyNode : Enemy = Enemy()
         enemyNode.position.x = xPosition
         enemyNode.position.y = yPosition
         enemies.append(enemyNode)
@@ -312,7 +332,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func CreateBullet()
     {
-        var bulletNode : Bullet = Bullet()
+        let bulletNode : Bullet = Bullet()
         
         bulletNode.position.x = characterNode.position.x + 25
         bulletNode.position.y = characterNode.position.y - 12
