@@ -59,23 +59,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         CreateEnemy(xPosition: 400, yPosition: -140)
     }
 
-    func HandleCharacterCollision(character: SKNode, object: SKNode)
+    func HandleCharacterCollision(character: SKNode, object: SKNode, contactPoint: CGPoint, contactNormal: CGVector)
     {
         if (object.name == "platform")
         {
-            // comparison with 0 here doesn't work -
-            // while being on a platform and making short tap, after the character lands,
-            // velocity is equal to very small value for some reason (maybe because of bounce
-            // despite restitution is set to zero?)
-            if ((character.physicsBody?.velocity.dy)! >= 0.1)
+            //print("contact point = (\(contactPoint.x), \(contactPoint.y))")
+            print("contact vector = (\(contactNormal.dx), \(contactNormal.dy))")
+            let characterPosition = character.position
+            
+            var characterObject = character as! Character
+            var platformObject = object as! Platform
+            
+            if contactNormal.dx == 0
             {
-                // need to check the normalvector
-                character.physicsBody?.collisionBitMask = CollisionCategories.Ground
-            }
-            else
-            {
-                // if we were falling when contact happened
-                character.physicsBody?.collisionBitMask = CollisionCategories.Ground | CollisionCategories.Platform
+                if ((character.physicsBody?.velocity.dy)! >= 0)
+                {
+                    // need to check the normalvector
+                    character.physicsBody?.collisionBitMask = CollisionCategories.Ground
+                }
+                else
+                {
+                    // if we were falling when contact happened
+                    character.physicsBody?.collisionBitMask = CollisionCategories.Ground | CollisionCategories.Platform
+                }
             }
         }
         else if(object.name == "enemy")
@@ -96,7 +102,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     {
         if (object.name == "platform")
         {
-            print("character/platform collision ends")
             character.physicsBody?.collisionBitMask = CollisionCategories.Ground
             // need to set character speed to 0
 //            characterXSpeed = 0
@@ -138,11 +143,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     {
         if contact.bodyA.node?.name == "character"
         {
-            HandleCharacterCollision(character: contact.bodyA.node!, object: contact.bodyB.node!)
+            HandleCharacterCollision(character: contact.bodyA.node!, object: contact.bodyB.node!, contactPoint: contact.contactPoint, contactNormal: contact.contactNormal)
         }
         else if contact.bodyB.node?.name == "character"
         {
-            HandleCharacterCollision(character: contact.bodyB.node!, object: contact.bodyA.node!)
+            HandleCharacterCollision(character: contact.bodyB.node!, object: contact.bodyA.node!, contactPoint: contact.contactPoint, contactNormal: contact.contactNormal)
         }
         else if contact.bodyA.node?.name == "bullet"
         {

@@ -56,8 +56,8 @@ class Character: GameObject
     {
         self.zPosition = 2
         
-        self.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 50, height: 112))
-        self.physicsBody?.mass = 0.44
+        self.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 50, height: 112), center: CGPoint(x: self.position.x, y: self.position.y))
+        self.physicsBody?.mass = 0.5
         self.physicsBody?.isDynamic = true
         self.physicsBody?.angularDamping = 0.0
         self.physicsBody?.allowsRotation = false
@@ -142,12 +142,10 @@ class Character: GameObject
     
     func Jump()
     {
-        print("jump")
         self.removeAction(forKey: "running")
         currState = playerState.jumping
         animate()
         
-        print((self.physicsBody?.velocity.dy)!)
         if ((self.physicsBody?.velocity.dy)! < 0.1 && (self.physicsBody?.velocity.dy)! > -0.1 && numOfJumps == 2)
         {
             numOfJumps -= 1
