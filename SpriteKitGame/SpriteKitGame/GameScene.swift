@@ -16,7 +16,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var isGameEnd : Bool = false
     
     private var characterNode : Character!
-    private var groundNode : SKSpriteNode!
+    private var groundNode1 : Ground?
+    private var groundNode2 : Ground?
     
     private var bullets : Array<Bullet> = Array()
     private var enemies : Array<Enemy> = Array()
@@ -211,6 +212,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if false == self.isGameEnd
         {
             characterNode.Update()
+            groundNode1?.Update()
+            groundNode2?.Update()
 
             // Update platforms
             for (i, platform) in platformListOnScreen.enumerated().reversed()
@@ -286,18 +289,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func CreateCharacter()
     {
         characterNode = Character()
-        characterNode.position = CGPoint(x: 0, y: -100)
+        characterNode.position = CGPoint(x: -300, y: -80)
         addChild(characterNode)
     }
     
     func CreateGround()
     {
-        groundNode = self.childNode(withName: "//groundNode") as? SKSpriteNode
-        groundNode.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 896.0, height: 45))
-        groundNode.physicsBody?.isDynamic = false
-        groundNode.physicsBody?.restitution = 0
-        groundNode.physicsBody?.categoryBitMask = CollisionCategories.Ground
-        groundNode.physicsBody?.collisionBitMask = 0
+        groundNode1 = Ground(16, -196.5)
+        groundNode2 = Ground(944, -196.5)
+        addChild(groundNode1!)
+        addChild(groundNode2!)
     }
     
     func CreateEnemy(xPosition: CGFloat, yPosition: CGFloat)
