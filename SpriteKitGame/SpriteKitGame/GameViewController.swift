@@ -74,6 +74,7 @@ class GameViewController: UIViewController, GameManager {
                 gameScene.gameManager = self
                 UpdateScore(value: GameOptions.InitScore)
                 UpdateLife(value: GameOptions.InitLife)
+                UpdateAmmo(value: GameOptions.InitAmmo)
             }
             
             // Set the scale mode to scale to fit the window
@@ -89,9 +90,9 @@ class GameViewController: UIViewController, GameManager {
     
     // GameManager
     func PresentStartScene() {
+        setEndView(hide: true)
         setStartView(hide: false)
         setInstructionsView(hide: true)
-        setEndView(hide: true)
         
         if let posOrigin = self.posPlayButton {
             btnStart.frame.origin = posOrigin
@@ -129,9 +130,9 @@ class GameViewController: UIViewController, GameManager {
             SetScene(sceneName: "GameScene")
         }
         
+        setEndView(hide: true)
         setStartView(hide:true)
         setInstructionsView(hide:true)
-        setEndView(hide: true)
     }
     
     @IBAction func OnClickInstructionButton(_ sender: UIButton) {
@@ -162,6 +163,7 @@ class GameViewController: UIViewController, GameManager {
     func setStartView(hide:Bool) {
         btnStart.isHidden = hide
         btnInstructions.isHidden = hide
+        labelAmmo.isHidden = !hide
     }
     
     func setInstructionsView(hide:Bool) {
@@ -172,5 +174,6 @@ class GameViewController: UIViewController, GameManager {
     func setEndView(hide:Bool) {
         btnPlayAgain.isHidden = hide
         btnReturnMain.isHidden = hide
+        labelAmmo.isHidden = !hide
     }
 }
