@@ -16,6 +16,7 @@ class GameViewController: UIViewController, GameManager {
     @IBOutlet weak var StartButtonOutlet: UIButton!
     @IBOutlet weak var labelLife: UILabel!
     @IBOutlet weak var labelScore: UILabel!
+    @IBOutlet weak var labelAmmo: UILabel!
     
     // Current scence
     var currentScene: SKScene?
@@ -96,8 +97,10 @@ class GameViewController: UIViewController, GameManager {
     func UpdateLife(value:Int) {
         labelLife.text = "LIFE: \(value)"
     }
-    
-    
+    // GameManager
+    func UpdateAmmo(value:Int) {
+        labelAmmo.text = "\(value)"
+    }
     
     @IBAction func OnClickStartButton(_ sender: UIButton) {
         if let gameScene = currentScene as? GameScene

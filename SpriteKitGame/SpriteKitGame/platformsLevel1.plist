@@ -318,9 +318,9 @@
 	<array>
 		<dict>
 			<key>x</key>
-			<integer>700</integer>
+			<integer>500</integer>
 			<key>y</key>
-			<integer>50</integer>
+			<integer>-50</integer>
 			<key>width</key>
 			<integer>250</integer>
 			<key>height</key>

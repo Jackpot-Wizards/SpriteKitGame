@@ -75,6 +75,5 @@ class Enemy: GameObject
     
     func TouchMove(newPos: CGPoint)
     {
-        self.position = newPos
     }
 }

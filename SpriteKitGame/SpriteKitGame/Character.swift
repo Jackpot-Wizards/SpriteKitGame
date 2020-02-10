@@ -26,7 +26,7 @@ class Character: GameObject
     
     var jumpAction: SKAction!
     
-    var numOfJumps = 2
+    var numOfJumps = 1
     var isInFirstJump: Bool = true
     var characterSpeed = 0.0
     
@@ -114,24 +114,24 @@ class Character: GameObject
     
     override func Update()
     {
-        if ((self.physicsBody?.velocity.dy)! < 0.1 && (self.physicsBody?.velocity.dy)! >= -0.1 && numOfJumps < 2)
+        if self.position.x != 0
         {
-            numOfJumps = 2
+            self.position.x = 0
+        }
+        
+        // cannot jump while fallin
+        if (self.physicsBody?.velocity.dy)! < -0.1
+        {
+            numOfJumps = 0
+        }
+        
+        if ((self.physicsBody?.velocity.dy)! < 0.1 && (self.physicsBody?.velocity.dy)! >= -0.1 && numOfJumps < 1)
+        {
+            numOfJumps = 1
             self.removeAction(forKey: "jumping")
             currState = playerState.running
             animate()
         }
-
-        // TODO: use state machine here
-//        if (self.physicsBody?.velocity.dy)! >= 0
-//        {
-//            self.physicsBody?.collisionBitMask = CollisionCategories.Ground
-//        }
-//        // TODO: somehow use platforms position here
-//        else if (self.position.y - self.halfHeight!) >= 0
-//        {
-//            self.physicsBody?.collisionBitMask = CollisionCategories.Ground | CollisionCategories.Platform
-//        }
     }
     
     
@@ -142,30 +142,21 @@ class Character: GameObject
     
     func Jump()
     {
-        self.removeAction(forKey: "running")
-        currState = playerState.jumping
-        animate()
-        
-        if ((self.physicsBody?.velocity.dy)! < 0.1 && (self.physicsBody?.velocity.dy)! > -0.1 && numOfJumps == 2)
+        if ((self.physicsBody?.velocity.dy)! < 0.1 && (self.physicsBody?.velocity.dy)! > -0.1 && numOfJumps == 1)
         {
+            self.removeAction(forKey: "running")
+            currState = playerState.jumping
+            animate()
+            
             numOfJumps -= 1
             FirstJump()
-        }
-        else if (numOfJumps == 1)
-        {
-            numOfJumps -= 1
-            SecondJump()
         }
     }
     
     func FirstJump()
     {
-        self.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 300))
+        self.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 350))
     }
     
-    func SecondJump()
-    {
-        self.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 200))
-    }
 }
 

@@ -5,4 +5,5 @@ protocol GameManager
     
     func UpdateScore(value:Int)
     func UpdateLife(value:Int)
+    func UpdateAmmo(value:Int)
 }

@@ -10,5 +10,6 @@ import Foundation
 
 struct GameOptions {
     static let InitScore: Int = 0;
-    static let InitLife: Int = 3;
+    static let InitLife: Int = 999;
+    static let InitAmmo: Int = 3;
 }
