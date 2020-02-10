@@ -47,7 +47,7 @@ class Background: GameObject {
     
     override func Reset()
     {
-        position.x = 913.672
+        position.x = 913
     }
     
     override func Start()
@@ -61,7 +61,7 @@ class Background: GameObject {
     override func Update()
     {
         self.position.x -= leftSpeed!
-        if (position.x < -901.889) {
+        if (position.x < -899) {
             Reset()
         }
     }

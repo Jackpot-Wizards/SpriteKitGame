@@ -10,6 +10,8 @@
 		3002F97323F0BDE200509E62 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3002F97223F0BDE200509E62 /* Background.swift */; };
 		3002F97523F0D9EA00509E62 /* crab-idle.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3002F97423F0D9EA00509E62 /* crab-idle.atlas */; };
 		3002F97723F0DC6B00509E62 /* crab-walk.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3002F97623F0DC6B00509E62 /* crab-walk.atlas */; };
+		3002F97923F2001900509E62 /* power-up.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3002F97823F2001900509E62 /* power-up.atlas */; };
+		3002F97B23F2003F00509E62 /* shot.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3002F97A23F2003F00509E62 /* shot.atlas */; };
 		3022EDE423E7590C00FCC2F8 /* player-jump.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3022EDE323E7590C00FCC2F8 /* player-jump.atlas */; };
 		3047A08623E2078100F2FB2C /* player-run.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3047A08523E2078100F2FB2C /* player-run.atlas */; };
 		3FA45AA723E20A060013F0C4 /* platformsLevel1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FA45AA623E20A060013F0C4 /* platformsLevel1.plist */; };
@@ -45,6 +47,8 @@
 		3002F97223F0BDE200509E62 /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		3002F97423F0D9EA00509E62 /* crab-idle.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = "crab-idle.atlas"; sourceTree = "<group>"; };
 		3002F97623F0DC6B00509E62 /* crab-walk.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = "crab-walk.atlas"; sourceTree = "<group>"; };
+		3002F97823F2001900509E62 /* power-up.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = "power-up.atlas"; sourceTree = "<group>"; };
+		3002F97A23F2003F00509E62 /* shot.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = shot.atlas; sourceTree = "<group>"; };
 		3022EDE323E7590C00FCC2F8 /* player-jump.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = "player-jump.atlas"; sourceTree = "<group>"; };
 		3047A08523E2078100F2FB2C /* player-run.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = "player-run.atlas"; sourceTree = "<group>"; };
 		3FA45AA623E20A060013F0C4 /* platformsLevel1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = platformsLevel1.plist; sourceTree = "<group>"; };
@@ -92,6 +96,8 @@
 		3047A07F23E1E7AF00F2FB2C /* Sprites */ = {
 			isa = PBXGroup;
 			children = (
+				3002F97A23F2003F00509E62 /* shot.atlas */,
+				3002F97823F2001900509E62 /* power-up.atlas */,
 				3002F97623F0DC6B00509E62 /* crab-walk.atlas */,
 				3002F97423F0D9EA00509E62 /* crab-idle.atlas */,
 				3022EDE323E7590C00FCC2F8 /* player-jump.atlas */,
@@ -221,6 +227,8 @@
 			files = (
 				3FE23DC323E26E9D00C3412D /* EndScene.sks in Resources */,
 				F40AD34E23DCAE58009253FC /* Main.storyboard in Resources */,
+				3002F97923F2001900509E62 /* power-up.atlas in Resources */,
+				3002F97B23F2003F00509E62 /* shot.atlas in Resources */,
 				3002F97723F0DC6B00509E62 /* crab-walk.atlas in Resources */,
 				3022EDE423E7590C00FCC2F8 /* player-jump.atlas in Resources */,
 				3FA45AAF23E259190013F0C4 /* StartScene.sks in Resources */,
