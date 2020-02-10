@@ -63,6 +63,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func sceneDidLoad() {
         
         physicsWorld.contactDelegate = self
+        self.physicsWorld.gravity = CGVector(dx: 0, dy: -5)
         
         // Reset Game paramerters
         ResetGame(level:"platformsLevel1")
@@ -421,7 +422,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     /**
       Randomly generates an ammo
      */
-    func CreateAmmoRandom(xPosition: CGFloat, yPosition: CGFloat, moveSpeed:CGFloat = 3, freq:Int = 300) -> Bool
+    func CreateAmmoRandom(xPosition: CGFloat, yPosition: CGFloat, moveSpeed:CGFloat = 2, freq:Int = 300) -> Bool
     {
        
         let randomSource = GKARC4RandomSource()

@@ -157,7 +157,7 @@ class Character: GameObject
     
     func FirstJump()
     {
-        self.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 350))
+        self.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 270))
     }
     
 }
