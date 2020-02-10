@@ -379,6 +379,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let enemyNode : Enemy = Enemy()
         enemyNode.position.x = xPosition
         enemyNode.position.y = yPosition
+        enemyNode.moveSpeed = moveSpeed
         enemies.append(enemyNode)
         addChild(enemyNode)
     }
