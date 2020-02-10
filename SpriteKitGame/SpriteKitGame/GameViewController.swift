@@ -14,9 +14,15 @@ class GameViewController: UIViewController, GameManager {
 
     // Outlets
     @IBOutlet weak var StartButtonOutlet: UIButton!
+    @IBOutlet weak var InstructionButtonOutlet: UIButton!
+    @IBOutlet weak var btnDescription: UIButton!
     @IBOutlet weak var labelLife: UILabel!
     @IBOutlet weak var labelScore: UILabel!
     @IBOutlet weak var labelAmmo: UILabel!
+    @IBOutlet weak var labelDescription: UILabel!
+
+    
+    private var posPlayButton : CGPoint?
     
     // Current scence
     var currentScene: SKScene?
@@ -27,6 +33,7 @@ class GameViewController: UIViewController, GameManager {
         
         // Set scene with StartScene
         SetScene(sceneName: "StartScene")
+        PresentStartScene()
     }
 
     override var shouldAutorotate: Bool {
@@ -80,6 +87,14 @@ class GameViewController: UIViewController, GameManager {
     // GameManager
     func PresentStartScene() {
         StartButtonOutlet.isHidden = false
+        InstructionButtonOutlet.isHidden = false
+        labelDescription.isHidden = true
+        btnDescription.isHidden = true
+        
+        if let posOrigin = self.posPlayButton {
+            StartButtonOutlet.frame.origin = posOrigin
+        }
+        
     }
     
     // GameManager
@@ -112,6 +127,27 @@ class GameViewController: UIViewController, GameManager {
             SetScene(sceneName: "GameScene")
         }
         StartButtonOutlet.isHidden = true
+        InstructionButtonOutlet.isHidden = true
+        labelDescription.isHidden = true
+        btnDescription.isHidden = true
+    }
+    
+    @IBAction func OnClickInstructionButton(_ sender: UIButton) {
+        InstructionButtonOutlet.isHidden = true
+        labelDescription.isHidden = false
+        btnDescription.isHidden = false
         
+        posPlayButton = StartButtonOutlet.frame.origin
+        StartButtonOutlet.frame.origin = CGPoint(x: StartButtonOutlet.frame.origin.x, y: 350)
+        btnDescription.setImage(UIImage(named: "ins01"), for: .normal)
+    }
+    
+    @IBAction func OnClickDescription(_ sender: UIButton) {
+        if sender.currentImage == UIImage(named: "ins01") {
+            sender.setImage(UIImage(named: "ins02"), for: .normal)
+        }
+        else {
+            sender.setImage(UIImage(named: "ins01"), for: .normal)
+        }
     }
 }
