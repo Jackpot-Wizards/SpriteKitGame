@@ -370,7 +370,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let ammoNode : Ammo = Ammo()
         ammoNode.position.x = xPosition
         ammoNode.position.y = yPosition
-        ammoNode.moveSpeed = moveSpeed
+        ammoNode.dx = moveSpeed
         ammos.append(ammoNode)
         addChild(ammoNode)
     }
@@ -380,7 +380,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let enemyNode : Enemy = Enemy()
         enemyNode.position.x = xPosition
         enemyNode.position.y = yPosition
-        enemyNode.moveSpeed = moveSpeed
+        enemyNode.dx = moveSpeed
         enemies.append(enemyNode)
         addChild(enemyNode)
     }
@@ -419,14 +419,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     var randomNum = randomSource.nextInt(upperBound: freqEnemy)
                     if(randomNum == 0)
                     {
-                        CreateEnemy(xPosition: xPos, yPosition: yPos, moveSpeed: plt.leftSpeed!)
+                        CreateEnemy(xPosition: xPos, yPosition: yPos, moveSpeed: plt.dx!)
                     }
                     else
                     {
                         // Randomly generate an ammo on a pltform
                         randomNum = randomSource.nextInt(upperBound: freqAmmo)
                         if(randomNum == 0) {
-                            CreateAmmo(xPosition: xPos, yPosition: yPos, moveSpeed: plt.leftSpeed!)
+                            CreateAmmo(xPosition: xPos, yPosition: yPos, moveSpeed: plt.dx!)
                         }
                     }
                     

@@ -16,8 +16,6 @@ class Platform: GameObject
     
     var initialX: CGFloat?
     var initialY: CGFloat?
-    var leftSpeed: CGFloat?
-
 
     // Init from dictionay
     convenience init?(dict: [String : Any]) {
@@ -38,7 +36,7 @@ class Platform: GameObject
         
         self.initialX = initialX
         self.initialY = initialY
-        self.leftSpeed = leftSpeed
+        self.dx = leftSpeed
         
         Start()
     }
@@ -88,7 +86,7 @@ class Platform: GameObject
         }
         else
         {
-            self.position.x -= leftSpeed!
+            self.position.x -= dx!
         }
     }
 }

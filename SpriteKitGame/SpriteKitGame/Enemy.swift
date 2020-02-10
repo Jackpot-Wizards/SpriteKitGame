@@ -12,13 +12,13 @@ import SpriteKit
 class Enemy: GameObject
 {
     var isDestroyed: Bool = false
-    var moveSpeed: CGFloat = 5
     
     private var walkFrames: [SKTexture] = []
     
     override init()
     {
         super.init(imageString: "enemy", size: CGSize(width: 80.0, height: 60.0))
+        dx = 5
         buildAnimations()
         animate()
         Start()
@@ -70,7 +70,7 @@ class Enemy: GameObject
     
     override func Update()
     {
-        self.position.x -= self.moveSpeed
+        self.position.x -= self.dx!
     }
     
     

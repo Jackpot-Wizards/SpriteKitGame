@@ -12,12 +12,12 @@ import SpriteKit
 class Ammo: GameObject
 {
     var isDestroyed: Bool = false
-    var moveSpeed: CGFloat = 3
-    
+
     // constructor
     override init()
     {
         super.init(imageString: "gun_control", size: CGSize(width: 50.0, height: 50.0))
+        dx = 3
         super.name = "ammo"
         Start()
     }
@@ -49,7 +49,7 @@ class Ammo: GameObject
     
     override func Update()
     {
-        self.position.x -= moveSpeed
+        self.position.x -= dx!
     }
     
     
