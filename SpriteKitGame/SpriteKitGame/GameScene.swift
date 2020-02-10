@@ -71,6 +71,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         CreateGround()
         CreateEnemy(xPosition: 400, yPosition: -140)
         CreateCharacter()
+        
+        let backgroundSound = SKAudioNode(fileNamed: "Race to Mars.mp3")
+        self.addChild(backgroundSound)
     }
 
     func HandleCharacterCollision(character: SKNode, object: SKNode, contactPoint: CGPoint, contactNormal: CGVector)

@@ -12,6 +12,7 @@
 		3002F97723F0DC6B00509E62 /* crab-walk.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3002F97623F0DC6B00509E62 /* crab-walk.atlas */; };
 		3002F97923F2001900509E62 /* power-up.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3002F97823F2001900509E62 /* power-up.atlas */; };
 		3002F97B23F2003F00509E62 /* shot.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3002F97A23F2003F00509E62 /* shot.atlas */; };
+		3002F97D23F202D700509E62 /* Race to Mars.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3002F97C23F202D700509E62 /* Race to Mars.mp3 */; };
 		3022EDE423E7590C00FCC2F8 /* player-jump.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3022EDE323E7590C00FCC2F8 /* player-jump.atlas */; };
 		3047A08623E2078100F2FB2C /* player-run.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3047A08523E2078100F2FB2C /* player-run.atlas */; };
 		3FA45AA723E20A060013F0C4 /* platformsLevel1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FA45AA623E20A060013F0C4 /* platformsLevel1.plist */; };
@@ -49,6 +50,7 @@
 		3002F97623F0DC6B00509E62 /* crab-walk.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = "crab-walk.atlas"; sourceTree = "<group>"; };
 		3002F97823F2001900509E62 /* power-up.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = "power-up.atlas"; sourceTree = "<group>"; };
 		3002F97A23F2003F00509E62 /* shot.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = shot.atlas; sourceTree = "<group>"; };
+		3002F97C23F202D700509E62 /* Race to Mars.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Race to Mars.mp3"; sourceTree = "<group>"; };
 		3022EDE323E7590C00FCC2F8 /* player-jump.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = "player-jump.atlas"; sourceTree = "<group>"; };
 		3047A08523E2078100F2FB2C /* player-run.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = "player-run.atlas"; sourceTree = "<group>"; };
 		3FA45AA623E20A060013F0C4 /* platformsLevel1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = platformsLevel1.plist; sourceTree = "<group>"; };
@@ -93,6 +95,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3002F97E23F202E400509E62 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				3002F97C23F202D700509E62 /* Race to Mars.mp3 */,
+			);
+			name = Sounds;
+			sourceTree = "<group>";
+		};
 		3047A07F23E1E7AF00F2FB2C /* Sprites */ = {
 			isa = PBXGroup;
 			children = (
@@ -125,6 +135,7 @@
 		F40AD34123DCAE58009253FC /* SpriteKitGame */ = {
 			isa = PBXGroup;
 			children = (
+				3002F97E23F202E400509E62 /* Sounds */,
 				3047A07F23E1E7AF00F2FB2C /* Sprites */,
 				F40AD35C23DCAF58009253FC /* Objects */,
 				F40AD34223DCAE58009253FC /* AppDelegate.swift */,
@@ -226,6 +237,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3FE23DC323E26E9D00C3412D /* EndScene.sks in Resources */,
+				3002F97D23F202D700509E62 /* Race to Mars.mp3 in Resources */,
 				F40AD34E23DCAE58009253FC /* Main.storyboard in Resources */,
 				3002F97923F2001900509E62 /* power-up.atlas in Resources */,
 				3002F97B23F2003F00509E62 /* shot.atlas in Resources */,
