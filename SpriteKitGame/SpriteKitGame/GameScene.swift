@@ -64,7 +64,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Reset Game paramerters
         ResetGame(level:"platformsLevel1")
         
-        CreateBackGround()
+        //CreateBackGround()
         CreateGround()
         CreateEnemy(xPosition: 400, yPosition: -140)
         CreateCharacter()
@@ -339,7 +339,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func CreateCharacter()
     {
         characterNode = Character()
-        characterNode.position = CGPoint(x: -290, y: -80)
+        characterNode.position = CGPoint(x: -280, y: -100)
         addChild(characterNode)
     }
     
