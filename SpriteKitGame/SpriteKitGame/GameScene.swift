@@ -64,7 +64,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Reset Game paramerters
         ResetGame(level:"platformsLevel1")
         
-        //CreateBackGround()
+        CreateBackGround()
         CreateGround()
         CreateEnemy(xPosition: 400, yPosition: -140)
         CreateCharacter()

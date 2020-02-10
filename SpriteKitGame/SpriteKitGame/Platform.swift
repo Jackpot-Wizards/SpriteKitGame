@@ -24,6 +24,7 @@ class Platform: GameObject
         let x = dict["x"] as? CGFloat
         let y = dict["y"] as? CGFloat
         let speed = dict["speed"] as? CGFloat
+        //let speed: CGFloat? = 10
         
         let width = dict["width"] as? CGFloat
         let height = dict["height"] as? CGFloat

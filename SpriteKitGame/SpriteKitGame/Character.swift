@@ -144,6 +144,8 @@ class Character: GameObject
     {
         if ((self.physicsBody?.velocity.dy)! < 0.1 && (self.physicsBody?.velocity.dy)! > -0.1 && numOfJumps == 1)
         {
+            self.physicsBody?.collisionBitMask = CollisionCategories.Ground
+            
             self.removeAction(forKey: "running")
             currState = playerState.jumping
             animate()
