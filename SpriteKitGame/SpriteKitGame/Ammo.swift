@@ -12,6 +12,8 @@ import SpriteKit
 class Ammo: GameObject
 {
     var isDestroyed: Bool = false
+    var moveSpeed: CGFloat = 3
+    
     // constructor
     override init()
     {
@@ -47,7 +49,7 @@ class Ammo: GameObject
     
     override func Update()
     {
-        self.position.x -= 3
+        self.position.x -= moveSpeed
     }
     
     

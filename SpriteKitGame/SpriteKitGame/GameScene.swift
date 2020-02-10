@@ -37,7 +37,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var gameLife: Int = GameOptions.InitLife
     var ammoCount: Int = GameOptions.InitAmmo
     
-    private let freqEnemy : Int = 5 // The smaller number, the more frequent
+    private let freqEnemy : Int = 2 // The smaller number, the more frequent
+    private let freqAmmo : Int = 9  // The smaller number, the more frequent
     
     // Reset Game based on the level
     func ResetGame(level : String) {
@@ -364,12 +365,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(middleGroundNode2!)
     }
     
-    func CreateAmmo(xPosition: CGFloat, yPosition: CGFloat)
+    func CreateAmmo(xPosition: CGFloat, yPosition: CGFloat, moveSpeed:CGFloat = 3)
     {
         let ammoNode : Ammo = Ammo()
-        
         ammoNode.position.x = xPosition
         ammoNode.position.y = yPosition
+        ammoNode.moveSpeed = moveSpeed
         ammos.append(ammoNode)
         addChild(ammoNode)
     }
@@ -408,15 +409,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     platformListOnScreen.append(plt)
                     addChild(plt)
                     
+                    // Randomly generates an object on a platform //
+                    // Center top positon of a platform where an object may appear
+                    let xPos = plt.position.x
+                    let yPos = plt.position.y + plt.height!*2 + 10
+                    
                     // Randomly generates an enemy on a platform
                     let randomSource = GKARC4RandomSource()
-                    let randomNum = randomSource.nextInt(upperBound: freqEnemy)
-                    if(randomNum == 1)
+                    var randomNum = randomSource.nextInt(upperBound: freqEnemy)
+                    if(randomNum == 0)
                     {
-                        let xPos = plt.position.x
-                        let yPos = plt.position.y + plt.height!*2 + 10
-                        CreateEnemy(xPosition: xPos, yPosition: yPos, moveSpeed: 2)
+                        CreateEnemy(xPosition: xPos, yPosition: yPos, moveSpeed: plt.leftSpeed!)
                     }
+                    else
+                    {
+                        // Randomly generate an ammo on a pltform
+                        randomNum = randomSource.nextInt(upperBound: freqAmmo)
+                        if(randomNum == 0) {
+                            CreateAmmo(xPosition: xPos, yPosition: yPos, moveSpeed: plt.leftSpeed!)
+                        }
+                    }
+                    
                 }
             }
         }
