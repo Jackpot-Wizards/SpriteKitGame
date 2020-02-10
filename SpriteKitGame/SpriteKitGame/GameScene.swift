@@ -270,11 +270,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             }
             
-            if (ammos.count == 0)
-            {
-                // this is just for testing
-                CreateAmmo(xPosition: 300, yPosition: -140)
-            }
+//            if (ammos.count == 0)
+//            {
+//                // this is just for testing
+//                CreateAmmo(xPosition: 300, yPosition: -140)
+//            }
+            _ = CreateAmmoRandom(xPosition: 400, yPosition: -140, freq: 1000)
             
             // Update ammos
             for (i, ammo) in ammos.enumerated().reversed()
@@ -289,11 +290,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             
             
-            if (enemies.count == 0)
-            {
-                // this is just for testing
-                CreateEnemy(xPosition: 400, yPosition: -140)
-            }
+//            if (enemies.count == 0)
+//            {
+//                // this is just for testing
+//                CreateEnemy(xPosition: 400, yPosition: -140)
+//            }
+            _ = CreateEnemyRandom(xPosition: 400, yPosition: -140)
             
             // Update enemies
             for (i, enemy) in enemies.enumerated().reversed()
@@ -396,6 +398,44 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     /**
+     Randomly generates an enemy
+    */
+    func CreateEnemyRandom(xPosition: CGFloat, yPosition: CGFloat, moveSpeed:CGFloat = 5, freq:Int = 300) -> Bool
+    {
+        let randomSource = GKARC4RandomSource()
+        let randomNum = randomSource.nextInt(upperBound: freq)
+        if(randomNum == 0)
+        {
+            CreateEnemy(xPosition: xPosition, yPosition: yPosition, moveSpeed: moveSpeed)
+            return true
+        }
+        else
+        {
+            return false
+        }
+    }
+    
+    /**
+      Randomly generates an ammo
+     */
+    func CreateAmmoRandom(xPosition: CGFloat, yPosition: CGFloat, moveSpeed:CGFloat = 3, freq:Int = 300) -> Bool
+    {
+       
+        let randomSource = GKARC4RandomSource()
+        let randomNum = randomSource.nextInt(upperBound: freq)
+        if(randomNum == 0)
+        {
+            CreateAmmo(xPosition: xPosition, yPosition: yPosition, moveSpeed: moveSpeed)
+            return true
+        }
+        else
+        {
+            return false
+        }
+    }
+    
+    
+    /**
      Add new platforms to the screen from the platform list pool
      */
     func addNewPlatformsToScreen()
@@ -415,21 +455,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     let yPos = plt.position.y + plt.height!*2 + 10
                     
                     // Randomly generates an enemy on a platform
-                    let randomSource = GKARC4RandomSource()
-                    var randomNum = randomSource.nextInt(upperBound: freqEnemy)
-                    if(randomNum == 0)
+                    let isCreated = CreateEnemyRandom(xPosition: xPos, yPosition: yPos, moveSpeed: plt.dx!, freq:freqEnemy)
+                    if(!isCreated)
                     {
-                        CreateEnemy(xPosition: xPos, yPosition: yPos, moveSpeed: plt.dx!)
+                        // Randomly generates an ammo on a platform
+                        _ = CreateAmmoRandom(xPosition: xPos, yPosition: yPos, moveSpeed: plt.dx!, freq:freqAmmo)
                     }
-                    else
-                    {
-                        // Randomly generate an ammo on a pltform
-                        randomNum = randomSource.nextInt(upperBound: freqAmmo)
-                        if(randomNum == 0) {
-                            CreateAmmo(xPosition: xPos, yPosition: yPos, moveSpeed: plt.dx!)
-                        }
-                    }
-                    
                 }
             }
         }
