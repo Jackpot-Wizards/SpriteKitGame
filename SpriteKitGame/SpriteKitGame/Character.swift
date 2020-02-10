@@ -54,7 +54,7 @@ class Character: GameObject
     
     override func Start()
     {
-        self.zPosition = 2
+        self.zPosition = 5
         
         self.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 50, height: 112), center: CGPoint(x: self.position.x, y: self.position.y))
         self.physicsBody?.mass = 0.5
