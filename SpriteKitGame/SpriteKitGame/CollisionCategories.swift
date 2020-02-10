@@ -14,4 +14,5 @@ struct CollisionCategories {
     static let Ground: UInt32 = 4;
     static let Bullet: UInt32 = 8;
     static let Enemy: UInt32 = 16;
+    static let Ammo: UInt32 = 32;
 }

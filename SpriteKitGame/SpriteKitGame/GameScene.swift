@@ -20,6 +20,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private var bullets : Array<Bullet> = Array()
     private var enemies : Array<Enemy> = Array()
+    private var ammos: Array<Ammo> = Array()
     
     // For the platforms
     private var platformListOnScreen : Array<Platform> = Array()    // List of platforms on the screen
@@ -29,15 +30,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var gameCount: Int = 0
     var gameScore: Int = GameOptions.InitScore
     var gameLife: Int = GameOptions.InitLife
+    var ammoCount: Int = GameOptions.InitAmmo
     
     // Reset Game based on the level
     func ResetGame(level : String) {
         gameCount = 0
         gameScore = GameOptions.InitScore
         gameLife = GameOptions.InitLife
+        ammoCount = GameOptions.InitAmmo
         
         bullets = [Bullet]()
         enemies = [Enemy]()
+        ammos = [Ammo]()
+        
         platformListOnScreen = [Platform]()
         
         // Initialize platformController
@@ -63,39 +68,49 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     {
         if (object.name == "platform")
         {
-            //print("contact point = (\(contactPoint.x), \(contactPoint.y))")
-            print("contact vector = (\(contactNormal.dx), \(contactNormal.dy))")
-            let characterPosition = character.position
-            
-            var characterObject = character as! Character
-            var platformObject = object as! Platform
-            
-            if contactNormal.dx == 0
-            {
+
                 if ((character.physicsBody?.velocity.dy)! >= 0)
                 {
                     // need to check the normalvector
                     character.physicsBody?.collisionBitMask = CollisionCategories.Ground
                 }
-                else
+                else if contactNormal.dx == 0
                 {
                     // if we were falling when contact happened
                     character.physicsBody?.collisionBitMask = CollisionCategories.Ground | CollisionCategories.Platform
                 }
-            }
         }
-        else if(object.name == "enemy")
+        else if object.name == "enemy"
         {
             (object as? Enemy)!.isDestroyed = true
             
             self.gameLife -= 1
             gameManager?.UpdateLife(value: self.gameLife)
-            if 0 == self.gameLife {
+            
+            if 0 == self.gameLife
+            {
                 self.isGameEnd = true
                 self.gameManager?.PresentEndScene()
             }
+        }
+        else if object.name == "ammo"
+        {
+            (object as? Ammo)!.isDestroyed = true
             
-        } else {}
+            self.ammoCount += 1
+            
+            gameManager?.UpdateAmmo(value: self.ammoCount)
+            
+            for (i,ammo) in ammos.enumerated().reversed()
+            {
+                
+                if ammo.isDestroyed
+                {
+                    ammos.remove(at: i)
+                    ammo.removeFromParent()
+                }
+            }
+        }
     }
     
     func HandleCharacterCollisionEnd(character: SKNode, object: SKNode)
@@ -103,8 +118,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if (object.name == "platform")
         {
             character.physicsBody?.collisionBitMask = CollisionCategories.Ground
-            // need to set character speed to 0
-//            characterXSpeed = 0
         }
     }
     
@@ -242,6 +255,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             }
             
+            if (ammos.count == 0)
+            {
+                // this is just for testing
+                CreateAmmo(xPosition: 300, yPosition: -140)
+            }
+            
+            // Update ammos
+            for (i, ammo) in ammos.enumerated().reversed()
+            {
+                ammo.Update()
+                
+                if ((ammo.position.x < -475) || (ammo.isDestroyed))
+                {
+                    ammos.remove(at: i)
+                    ammo.removeFromParent()
+                }
+            }
+            
+            
             if (enemies.count == 0)
             {
                 // this is just for testing
@@ -272,7 +304,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 
                 if node.name == "gunControl" {
                     print("gunControl clicked")
-                    CreateBullet()
+                    
+                    if self.ammoCount > 0
+                    {
+                        CreateBullet()
+                        
+                        self.ammoCount -= 1
+                        
+                        gameManager?.UpdateAmmo(value: self.ammoCount)
+                    }
+                    
                 }
                 else
                 {
@@ -300,9 +341,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         groundNode.physicsBody?.collisionBitMask = 0
     }
     
+    func CreateAmmo(xPosition: CGFloat, yPosition: CGFloat)
+    {
+        let ammoNode : Ammo = Ammo()
+        
+        ammoNode.position.x = xPosition
+        ammoNode.position.y = yPosition
+        ammos.append(ammoNode)
+        addChild(ammoNode)
+    }
+    
     func CreateEnemy(xPosition: CGFloat, yPosition: CGFloat)
     {
-        var enemyNode : Enemy = Enemy()
+        let enemyNode : Enemy = Enemy()
+        
         enemyNode.position.x = xPosition
         enemyNode.position.y = yPosition
         enemies.append(enemyNode)
@@ -311,7 +363,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func CreateBullet()
     {
-        var bulletNode : Bullet = Bullet()
+        let bulletNode : Bullet = Bullet()
         
         bulletNode.position.x = characterNode.position.x + 25
         bulletNode.position.y = characterNode.position.y - 12
