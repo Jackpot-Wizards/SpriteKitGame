@@ -13,9 +13,12 @@ import GameplayKit
 class GameViewController: UIViewController, GameManager {
 
     // Outlets
-    @IBOutlet weak var StartButtonOutlet: UIButton!
-    @IBOutlet weak var InstructionButtonOutlet: UIButton!
+    @IBOutlet weak var btnStart: UIButton!
+    @IBOutlet weak var btnInstructions: UIButton!
     @IBOutlet weak var btnDescription: UIButton!
+    @IBOutlet weak var btnPlayAgain: UIButton!
+    @IBOutlet weak var btnReturnMain: UIButton!
+    
     @IBOutlet weak var labelLife: UILabel!
     @IBOutlet weak var labelScore: UILabel!
     @IBOutlet weak var labelAmmo: UILabel!
@@ -86,13 +89,12 @@ class GameViewController: UIViewController, GameManager {
     
     // GameManager
     func PresentStartScene() {
-        StartButtonOutlet.isHidden = false
-        InstructionButtonOutlet.isHidden = false
-        labelDescription.isHidden = true
-        btnDescription.isHidden = true
+        setStartView(hide: false)
+        setInstructionsView(hide: true)
+        setEndView(hide: true)
         
         if let posOrigin = self.posPlayButton {
-            StartButtonOutlet.frame.origin = posOrigin
+            btnStart.frame.origin = posOrigin
         }
         
     }
@@ -100,7 +102,7 @@ class GameViewController: UIViewController, GameManager {
     // GameManager
     func PresentEndScene() {
 //        BackButtonOutlet.isHidden = false
-        StartButtonOutlet.isHidden = false
+        setEndView(hide:false)
         SetScene(sceneName: "EndScene")
     }
     
@@ -126,19 +128,18 @@ class GameViewController: UIViewController, GameManager {
             // Change to GameScene
             SetScene(sceneName: "GameScene")
         }
-        StartButtonOutlet.isHidden = true
-        InstructionButtonOutlet.isHidden = true
-        labelDescription.isHidden = true
-        btnDescription.isHidden = true
+        
+        setStartView(hide:true)
+        setInstructionsView(hide:true)
+        setEndView(hide: true)
     }
     
     @IBAction func OnClickInstructionButton(_ sender: UIButton) {
-        InstructionButtonOutlet.isHidden = true
-        labelDescription.isHidden = false
-        btnDescription.isHidden = false
+        btnInstructions.isHidden = true
+        setInstructionsView(hide:false)
         
-        posPlayButton = StartButtonOutlet.frame.origin
-        StartButtonOutlet.frame.origin = CGPoint(x: StartButtonOutlet.frame.origin.x, y: 350)
+        posPlayButton = btnStart.frame.origin
+        btnStart.frame.origin = CGPoint(x: btnStart.frame.origin.x, y: 350)
         btnDescription.setImage(UIImage(named: "ins01"), for: .normal)
     }
     
@@ -149,5 +150,27 @@ class GameViewController: UIViewController, GameManager {
         else {
             sender.setImage(UIImage(named: "ins01"), for: .normal)
         }
+    }
+    
+    @IBAction func OnClickReturnMain(_ sender: UIButton) {
+        // Set scene with StartScene
+        SetScene(sceneName: "StartScene")
+        PresentStartScene()
+    }
+    
+    
+    func setStartView(hide:Bool) {
+        btnStart.isHidden = hide
+        btnInstructions.isHidden = hide
+    }
+    
+    func setInstructionsView(hide:Bool) {
+        labelDescription.isHidden = hide
+        btnDescription.isHidden = hide
+    }
+    
+    func setEndView(hide:Bool) {
+        btnPlayAgain.isHidden = hide
+        btnReturnMain.isHidden = hide
     }
 }
