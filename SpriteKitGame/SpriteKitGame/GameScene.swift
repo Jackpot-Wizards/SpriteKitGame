@@ -37,6 +37,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var gameLife: Int = GameOptions.InitLife
     var ammoCount: Int = GameOptions.InitAmmo
     
+    private let freqEnemy : Int = 5 // The smaller number, the more frequent
+    
     // Reset Game based on the level
     func ResetGame(level : String) {
         gameCount = 0
@@ -372,7 +374,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(ammoNode)
     }
     
-    func CreateEnemy(xPosition: CGFloat, yPosition: CGFloat)
+    func CreateEnemy(xPosition: CGFloat, yPosition: CGFloat, moveSpeed:CGFloat = 5)
     {
         let enemyNode : Enemy = Enemy()
         enemyNode.position.x = xPosition
@@ -404,6 +406,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 {
                     platformListOnScreen.append(plt)
                     addChild(plt)
+                    
+                    // Randomly generates an enemy on a platform
+                    let randomSource = GKARC4RandomSource()
+                    let randomNum = randomSource.nextInt(upperBound: freqEnemy)
+                    if(randomNum == 1)
+                    {
+                        let xPos = plt.position.x
+                        let yPos = plt.position.y + plt.height!*2 + 10
+                        CreateEnemy(xPosition: xPos, yPosition: yPos, moveSpeed: 2)
+                    }
                 }
             }
         }

@@ -12,6 +12,7 @@ import SpriteKit
 class Enemy: GameObject
 {
     var isDestroyed: Bool = false
+    var moveSpeed: CGFloat = 5
     
     private var walkFrames: [SKTexture] = []
     
@@ -69,7 +70,7 @@ class Enemy: GameObject
     
     override func Update()
     {
-        self.position.x -= 5
+        self.position.x -= self.moveSpeed
     }
     
     
