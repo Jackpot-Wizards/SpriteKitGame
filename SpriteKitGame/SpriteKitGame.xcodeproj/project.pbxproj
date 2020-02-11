@@ -15,6 +15,11 @@
 		3002F97D23F202D700509E62 /* Race to Mars.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3002F97C23F202D700509E62 /* Race to Mars.mp3 */; };
 		3022EDE423E7590C00FCC2F8 /* player-jump.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3022EDE323E7590C00FCC2F8 /* player-jump.atlas */; };
 		3047A08623E2078100F2FB2C /* player-run.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3047A08523E2078100F2FB2C /* player-run.atlas */; };
+		30C939F323F34D2300F8689E /* jump.flac in Resources */ = {isa = PBXBuildFile; fileRef = 30C939F023F34D2300F8689E /* jump.flac */; };
+		30C939F423F34D2300F8689E /* death.wav in Resources */ = {isa = PBXBuildFile; fileRef = 30C939F123F34D2300F8689E /* death.wav */; };
+		30C939F523F34D2300F8689E /* laser.wav in Resources */ = {isa = PBXBuildFile; fileRef = 30C939F223F34D2300F8689E /* laser.wav */; };
+		30C939F723F34F8000F8689E /* hurt.wav in Resources */ = {isa = PBXBuildFile; fileRef = 30C939F623F34F8000F8689E /* hurt.wav */; };
+		30C939F923F3504100F8689E /* ammo-pickup.wav in Resources */ = {isa = PBXBuildFile; fileRef = 30C939F823F3504100F8689E /* ammo-pickup.wav */; };
 		3FA45AA723E20A060013F0C4 /* platformsLevel1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FA45AA623E20A060013F0C4 /* platformsLevel1.plist */; };
 		3FA45AA923E2540B0013F0C4 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA45AA823E2540B0013F0C4 /* GameManager.swift */; };
 		3FA45AAF23E259190013F0C4 /* StartScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3FA45AAE23E259190013F0C4 /* StartScene.sks */; };
@@ -53,6 +58,11 @@
 		3002F97C23F202D700509E62 /* Race to Mars.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Race to Mars.mp3"; sourceTree = "<group>"; };
 		3022EDE323E7590C00FCC2F8 /* player-jump.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = "player-jump.atlas"; sourceTree = "<group>"; };
 		3047A08523E2078100F2FB2C /* player-run.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = "player-run.atlas"; sourceTree = "<group>"; };
+		30C939F023F34D2300F8689E /* jump.flac */ = {isa = PBXFileReference; lastKnownFileType = file; path = jump.flac; sourceTree = "<group>"; };
+		30C939F123F34D2300F8689E /* death.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = death.wav; sourceTree = "<group>"; };
+		30C939F223F34D2300F8689E /* laser.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = laser.wav; sourceTree = "<group>"; };
+		30C939F623F34F8000F8689E /* hurt.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hurt.wav; sourceTree = "<group>"; };
+		30C939F823F3504100F8689E /* ammo-pickup.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "ammo-pickup.wav"; sourceTree = "<group>"; };
 		3FA45AA623E20A060013F0C4 /* platformsLevel1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = platformsLevel1.plist; sourceTree = "<group>"; };
 		3FA45AA823E2540B0013F0C4 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		3FA45AAE23E259190013F0C4 /* StartScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StartScene.sks; sourceTree = "<group>"; };
@@ -98,6 +108,11 @@
 		3002F97E23F202E400509E62 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				30C939F823F3504100F8689E /* ammo-pickup.wav */,
+				30C939F623F34F8000F8689E /* hurt.wav */,
+				30C939F123F34D2300F8689E /* death.wav */,
+				30C939F023F34D2300F8689E /* jump.flac */,
+				30C939F223F34D2300F8689E /* laser.wav */,
 				3002F97C23F202D700509E62 /* Race to Mars.mp3 */,
 			);
 			name = Sounds;
@@ -237,6 +252,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3FE23DC323E26E9D00C3412D /* EndScene.sks in Resources */,
+				30C939F423F34D2300F8689E /* death.wav in Resources */,
+				30C939F523F34D2300F8689E /* laser.wav in Resources */,
 				3002F97D23F202D700509E62 /* Race to Mars.mp3 in Resources */,
 				F40AD34E23DCAE58009253FC /* Main.storyboard in Resources */,
 				3002F97923F2001900509E62 /* power-up.atlas in Resources */,
@@ -244,8 +261,11 @@
 				3002F97723F0DC6B00509E62 /* crab-walk.atlas in Resources */,
 				3022EDE423E7590C00FCC2F8 /* player-jump.atlas in Resources */,
 				3FA45AAF23E259190013F0C4 /* StartScene.sks in Resources */,
+				30C939F723F34F8000F8689E /* hurt.wav in Resources */,
 				3FA45AA723E20A060013F0C4 /* platformsLevel1.plist in Resources */,
+				30C939F323F34D2300F8689E /* jump.flac in Resources */,
 				F40AD34523DCAE58009253FC /* GameScene.sks in Resources */,
+				30C939F923F3504100F8689E /* ammo-pickup.wav in Resources */,
 				F40AD35023DCAE59009253FC /* Assets.xcassets in Resources */,
 				F40AD35323DCAE59009253FC /* LaunchScreen.storyboard in Resources */,
 				3047A08623E2078100F2FB2C /* player-run.atlas in Resources */,

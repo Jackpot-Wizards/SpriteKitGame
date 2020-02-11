@@ -40,6 +40,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private let freqEnemy : Int = 2 // The smaller number, the more frequent
     private let freqAmmo : Int = 9  // The smaller number, the more frequent
     
+    var laserSound = SKAction.playSoundFileNamed("laser.wav", waitForCompletion: false)
+    var jumpSound = SKAction.playSoundFileNamed("jump.flac", waitForCompletion: false)
+    var deathSound = SKAction.playSoundFileNamed("death.wav", waitForCompletion: false)
+    var hurtSound = SKAction.playSoundFileNamed("hurt.wav", waitForCompletion: false)
+    var ammoPickupSound = SKAction.playSoundFileNamed("ammo-pickup.wav", waitForCompletion: false)
+    
     // Reset Game based on the level
     func ResetGame(level : String) {
         gameCount = 0
@@ -99,6 +105,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             self.gameLife -= 1
             gameManager?.UpdateLife(value: self.gameLife)
+            run(hurtSound)
             
             if 0 == self.gameLife
             {
@@ -113,6 +120,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.ammoCount += 1
             
             gameManager?.UpdateAmmo(value: self.ammoCount)
+            
+            run(ammoPickupSound)
             
             for (i,ammo) in ammos.enumerated().reversed()
             {
@@ -147,6 +156,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 {
                     enemies.remove(at: i)
                     enemy.removeFromParent()
+                    run(deathSound)
                 }
             }
             
@@ -339,6 +349,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 else
                 {
                     characterNode.Jump()
+                    run(jumpSound)
                 }
             }
         }
@@ -354,6 +365,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.ammoCount -= 1
             
             gameManager?.UpdateAmmo(value: self.ammoCount)
+            
+            run(laserSound)
         }
     }
     

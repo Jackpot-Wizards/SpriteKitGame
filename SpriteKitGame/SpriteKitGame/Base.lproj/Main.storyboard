@@ -83,7 +83,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="crosshair"/>
                                 <connections>
-                                    <action selector="onClickShoot:" destination="BV1-FR-VrT" eventType="touchUpInside" id="eu5-sY-1ot"/>
+                                    <action selector="onClickShoot:" destination="BV1-FR-VrT" eventType="touchDown" id="g9O-wg-5yp"/>
                                 </connections>
                             </button>
                         </subviews>
