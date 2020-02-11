@@ -373,7 +373,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func CreateCharacter()
     {
         characterNode = Character()
-        characterNode.position = CGPoint(x: -280, y: -100)
+        characterNode.position = CGPoint(x: -250, y: -100)
         addChild(characterNode)
     }
     

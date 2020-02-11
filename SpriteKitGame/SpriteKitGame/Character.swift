@@ -114,9 +114,9 @@ class Character: GameObject
     
     override func Update()
     {
-        if self.position.x != -280
+        if self.position.x != -250
         {
-            self.position.x = -280
+            self.position.x = -250
         }
         
         // cannot jump while fallin
