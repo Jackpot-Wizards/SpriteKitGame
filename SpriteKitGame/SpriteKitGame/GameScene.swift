@@ -344,6 +344,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    func btnShootPressed() {
+        print("gunControl clicked")
+        
+        if self.ammoCount > 0
+        {
+            CreateBullet()
+            
+            self.ammoCount -= 1
+            
+            gameManager?.UpdateAmmo(value: self.ammoCount)
+        }
+    }
     
     func CreateCharacter()
     {

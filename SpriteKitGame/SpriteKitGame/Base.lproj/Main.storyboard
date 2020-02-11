@@ -28,13 +28,6 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yvt-gq-KTY">
-                                <rect key="frame" x="64" y="283" width="50" height="49"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9uE-sQ-OJH">
                                 <rect key="frame" x="373" y="155" width="150" height="50"/>
                                 <state key="normal" image="playButton"/>
@@ -78,6 +71,21 @@
                                     <action selector="OnClickDescription:" destination="BV1-FR-VrT" eventType="touchUpInside" id="S5r-Ht-joS"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yvt-gq-KTY">
+                                <rect key="frame" x="36" y="283" width="50" height="49"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="24"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MgL-vQ-949">
+                                <rect key="frame" x="26" y="322" width="71" height="71"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="crosshair"/>
+                                <connections>
+                                    <action selector="onClickShoot:" destination="BV1-FR-VrT" eventType="touchUpInside" id="eu5-sY-1ot"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -101,6 +109,7 @@
                         <outlet property="btnInstructions" destination="Fqe-kK-KlJ" id="0L6-o9-1A1"/>
                         <outlet property="btnPlayAgain" destination="D87-KH-NUQ" id="fAk-0n-se1"/>
                         <outlet property="btnReturnMain" destination="dQB-el-WC9" id="SB8-Cn-7ZR"/>
+                        <outlet property="btnShoot" destination="MgL-vQ-949" id="4j7-V4-INr"/>
                         <outlet property="btnStart" destination="9uE-sQ-OJH" id="E3k-h3-qoo"/>
                         <outlet property="labelAmmo" destination="Yvt-gq-KTY" id="rEU-KX-ler"/>
                         <outlet property="labelDescription" destination="GFt-Wc-CTa" id="ldT-z7-yNI"/>
@@ -114,6 +123,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="crosshair" width="500" height="500"/>
         <image name="ins01" width="1376" height="656"/>
         <image name="instructionsButton" width="150" height="50"/>
         <image name="playButton" width="150" height="50"/>

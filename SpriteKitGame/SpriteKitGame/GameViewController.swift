@@ -18,6 +18,7 @@ class GameViewController: UIViewController, GameManager {
     @IBOutlet weak var btnDescription: UIButton!
     @IBOutlet weak var btnPlayAgain: UIButton!
     @IBOutlet weak var btnReturnMain: UIButton!
+    @IBOutlet weak var btnShoot: UIButton!
     
     @IBOutlet weak var labelLife: UILabel!
     @IBOutlet weak var labelScore: UILabel!
@@ -79,6 +80,7 @@ class GameViewController: UIViewController, GameManager {
             
             // Set the scale mode to scale to fit the window
             currentScene?.scaleMode = .aspectFill
+            currentScene?.name = sceneName
                             
             // Set properties of the View
             view.ignoresSiblingOrder = true
@@ -159,11 +161,19 @@ class GameViewController: UIViewController, GameManager {
         PresentStartScene()
     }
     
+    @IBAction func onClickShoot(_ sender: Any) {
+        if currentScene?.name == "GameScene" {
+            if let gameScene = currentScene as? GameScene {
+                gameScene.btnShootPressed()
+            }
+        }
+    }
     
     func setStartView(hide:Bool) {
         btnStart.isHidden = hide
         btnInstructions.isHidden = hide
         labelAmmo.isHidden = !hide
+        btnShoot.isHidden = !hide
     }
     
     func setInstructionsView(hide:Bool) {
@@ -175,5 +185,6 @@ class GameViewController: UIViewController, GameManager {
         btnPlayAgain.isHidden = hide
         btnReturnMain.isHidden = hide
         labelAmmo.isHidden = !hide
+        btnShoot.isHidden = !hide
     }
 }
