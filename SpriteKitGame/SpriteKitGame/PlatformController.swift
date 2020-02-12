@@ -1,11 +1,14 @@
-/*
-File Name: PlatformController.swift
-Author's Name: Huen Oh
-StudentID: 301082798
-Date: 2020.02.03
-App description: SpriteKitGame
-Version information: 1.0
-*/
+//
+//  PlatformController.swift
+//  Handles the random generation of platforms
+//
+//  Created by
+//  Ignat Pechkurenko - 301091721
+//  Blair Desjardins  - 301086973
+//  Heun Oh           - 301082798
+//
+//  Date last modified: Feb 11 2020
+//  Version 1.0
 
 import Foundation
 import GameplayKit

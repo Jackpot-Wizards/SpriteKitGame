@@ -1,10 +1,14 @@
 //
 //  Ammo.swift
-//  SpriteKitGame
+//  Ammo pickup randomly spawned on the ground and on platforms. Gives 1 ammo
 //
-//  Created by Ignat Pechkurenko on 2020-02-09.
-//  Copyright © 2020 Jackpot-Wizards. All rights reserved.
+//  Created by
+//  Ignat Pechkurenko - 301091721
+//  Blair Desjardins  - 301086973
+//  Heun Oh           - 301082798
 //
+//  Date last modified: Feb 11 2020
+//  Version 1.0
 
 import Foundation
 import SpriteKit

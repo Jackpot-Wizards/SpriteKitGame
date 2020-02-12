@@ -1,10 +1,14 @@
 //
 //  GameOptions.swift
-//  SpriteKitGame
+//  Holds game stats to be displayed on screen
 //
-//  Created by HUEN_OH on 2020-02-03.
-//  Copyright © 2020 Jackpot-Wizards. All rights reserved.
+//  Created by
+//  Ignat Pechkurenko - 301091721
+//  Blair Desjardins  - 301086973
+//  Heun Oh           - 301082798
 //
+//  Date last modified: Feb 11 2020
+//  Version 1.0
 
 import Foundation
 

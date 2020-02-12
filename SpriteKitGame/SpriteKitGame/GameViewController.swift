@@ -1,10 +1,14 @@
 //
 //  GameViewController.swift
-//  SpriteKitGame
+//  Handles which scene to be displayed as well as all menu UI
 //
-//  Created by Ignat Pechkurenko on 2020-01-25.
-//  Copyright © 2020 Jackpot-Wizards. All rights reserved.
+//  Created by
+//  Ignat Pechkurenko - 301091721
+//  Blair Desjardins  - 301086973
+//  Heun Oh           - 301082798
 //
+//  Date last modified: Feb 11 2020
+//  Version 1.0
 
 import UIKit
 import SpriteKit
