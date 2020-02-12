@@ -373,7 +373,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             run(laserSound)
         }
     }
-    
+
     func CreateCharacter()
     {
         characterNode = Character()
