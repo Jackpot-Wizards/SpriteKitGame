@@ -45,7 +45,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private let freqAmmo : Int = 9  // The smaller number, the more frequent
     
     var laserSound = SKAction.playSoundFileNamed("laser.wav", waitForCompletion: false)
-    var jumpSound = SKAction.playSoundFileNamed("jump.flac", waitForCompletion: false)
     var deathSound = SKAction.playSoundFileNamed("death.wav", waitForCompletion: false)
     var hurtSound = SKAction.playSoundFileNamed("hurt.wav", waitForCompletion: false)
     var ammoPickupSound = SKAction.playSoundFileNamed("ammo-pickup.wav", waitForCompletion: false)
@@ -353,7 +352,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 else
                 {
                     characterNode.Jump()
-                    run(jumpSound)
                 }
             }
         }

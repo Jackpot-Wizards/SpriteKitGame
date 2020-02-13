@@ -34,6 +34,8 @@ class Character: GameObject
     var isInFirstJump: Bool = true
     var characterSpeed = 0.0
     
+    var jumpSound = SKAction.playSoundFileNamed("jump.flac", waitForCompletion: false)
+    
     // constructor
     override init()
     {
@@ -162,6 +164,7 @@ class Character: GameObject
     func FirstJump()
     {
         self.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 270))
+        run(jumpSound)
     }
     
 }
