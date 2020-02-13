@@ -23,7 +23,7 @@ class Ammo: GameObject
     override init()
     {
         super.init(imageString: "gun_control", size: CGSize(width: 50.0, height: 50.0))
-        dx = 2
+        dx = 4
         super.name = "ammo"
         buildAnimations()
         animate()

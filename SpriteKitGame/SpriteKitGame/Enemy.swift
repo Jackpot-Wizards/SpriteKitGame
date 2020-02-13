@@ -22,7 +22,7 @@ class Enemy: GameObject
     override init()
     {
         super.init(imageString: "enemy", size: CGSize(width: 80.0, height: 60.0))
-        dx = 5
+        dx = 6
         buildAnimations()
         animate()
         Start()

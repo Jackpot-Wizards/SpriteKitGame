@@ -26,7 +26,7 @@ class Ground: GameObject {
         
         self.initialX = initialX
         self.initialY = initialY
-        self.leftSpeed = 2
+        self.leftSpeed = 4
         
         Start()
     }

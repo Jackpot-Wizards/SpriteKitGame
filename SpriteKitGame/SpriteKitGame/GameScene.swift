@@ -34,7 +34,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // For the platforms
     private var platformListOnScreen : Array<Platform> = Array()    // List of platforms on the screen
     private var platformController : PlatformController?            // Platfrom controller(generator)
-    private let platformDuration = 360                              // Durations between platforms(ms)
+    private let platformDuration = 180                              // Durations between platforms(ms)
     
     var gameCount: Int = 0
     var gameScore: Int = GameOptions.InitScore
@@ -313,7 +313,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 //                // this is just for testing
 //                CreateEnemy(xPosition: 400, yPosition: -140)
 //            }
-            _ = CreateEnemyRandom(xPosition: 400, yPosition: -140)
+            _ = CreateEnemyRandom(xPosition: 400, yPosition: -140, freq: 150)
             
             // Update enemies
             for (i, enemy) in enemies.enumerated().reversed()
@@ -410,7 +410,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(ammoNode)
     }
     
-    func CreateEnemy(xPosition: CGFloat, yPosition: CGFloat, moveSpeed:CGFloat = 5)
+    func CreateEnemy(xPosition: CGFloat, yPosition: CGFloat, moveSpeed:CGFloat = 6)
     {
         let enemyNode : Enemy = Enemy()
         enemyNode.position.x = xPosition
@@ -433,7 +433,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     /**
      Randomly generates an enemy
     */
-    func CreateEnemyRandom(xPosition: CGFloat, yPosition: CGFloat, moveSpeed:CGFloat = 5, freq:Int = 300) -> Bool
+    func CreateEnemyRandom(xPosition: CGFloat, yPosition: CGFloat, moveSpeed:CGFloat = 6, freq:Int = 300) -> Bool
     {
         let randomSource = GKARC4RandomSource()
         let randomNum = randomSource.nextInt(upperBound: freq)
@@ -451,7 +451,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     /**
       Randomly generates an ammo
      */
-    func CreateAmmoRandom(xPosition: CGFloat, yPosition: CGFloat, moveSpeed:CGFloat = 2, freq:Int = 300) -> Bool
+    func CreateAmmoRandom(xPosition: CGFloat, yPosition: CGFloat, moveSpeed:CGFloat = 4, freq:Int = 300) -> Bool
     {
        
         let randomSource = GKARC4RandomSource()

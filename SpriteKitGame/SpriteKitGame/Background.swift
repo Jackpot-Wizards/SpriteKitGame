@@ -25,12 +25,12 @@ class Background: GameObject {
         var imageString = ""
         if (textureSelector == 0) {
             imageString = "background"
-            self.leftSpeed = 0.5
+            self.leftSpeed = 1
             self.textureZ = CGFloat(textureSelector)
         }
         else if (textureSelector == 1){
             imageString = "middleground"
-            self.leftSpeed = 1
+            self.leftSpeed = 2
             self.textureZ = CGFloat(textureSelector)
         }
         super.init(imageString: imageString, size: CGSize(width: 907.779, height: 414))
